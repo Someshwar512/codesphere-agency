@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codesphere Agency | Global Web Development</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Poppins;background:#0b0f1a;color:#fff}
+
+header{background:#050816;position:sticky;top:0;padding:15px}
+nav{display:flex;justify-content:space-between;max-width:1200px;margin:auto}
+nav a{color:#cbd5f5;text-decoration:none;margin-left:15px}
+nav a:hover{color:#60a5fa}
+
+.hero{text-align:center;padding:100px 20px;background:linear-gradient(#1e3a8a,#020617)}
+.hero h1{font-size:42px}
+.hero p{color:#cbd5f5;margin:15px 0}
+.btn{background:#2563eb;color:white;padding:12px 25px;border:none;border-radius:6px;cursor:pointer}
+
+.section{max-width:1200px;margin:auto;padding:70px 20px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:30px}
+
+.card{background:#111827;padding:25px;border-radius:10px;border:1px solid #1f2937}
+.card:hover{transform:translateY(-5px);border-color:#2563eb}
+
+.price{font-size:30px;color:#60a5fa;margin:10px 0}
+
+.stats{display:flex;justify-content:center;gap:40px;margin-top:20px}
+.stats div{font-size:20px}
+
+form{max-width:500px;margin:auto;display:flex;flex-direction:column;gap:10px;margin-top:20px}
+input,textarea{padding:12px;border:none;border-radius:6px}
+button{background:#2563eb;color:white;padding:12px;border:none;border-radius:6px}
+
+footer{text-align:center;padding:25px;background:#020617;color:#aaa}
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:12px 18px;
+border-radius:50px;
+text-decoration:none;
+}
+
+.success{display:none;color:#22c55e;margin-top:10px}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<div><b>Codesphere</b></div>
+<div>
+<a href="#about">About</a>
+<a href="#services">Services</a>
+<a href="#pricing">Pricing</a>
+<a href="#contact">Contact</a>
+</div>
+</nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+<h1>We Build High-Converting Websites</h1>
+<p>Helping global businesses grow online with modern web solutions</p>
+<button class="btn">Start Your Project</button>
+</section>
+
+<!-- STATS -->
+<section class="section">
+<div class="stats">
+<div>💼 100+ Projects</div>
+<div>🌎 Global Clients</div>
+<div>⚡ Fast Delivery</div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+<h2>About Us</h2>
+<p>Codesphere Agency is a professional web development company providing high-quality websites, ecommerce solutions, and custom web applications for businesses worldwide.</p>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+<h2>Our Services</h2>
+
+<div class="grid">
+<div class="card"><h3>Website Design</h3><p>Modern UI/UX design</p></div>
+<div class="card"><h3>Web Development</h3><p>Full stack development</p></div>
+<div class="card"><h3>Ecommerce</h3><p>Online store solutions</p></div>
+<div class="card"><h3>SEO Optimization</h3><p>Boost Google ranking</p></div>
+<div class="card"><h3>Landing Pages</h3><p>High conversion pages</p></div>
+<div class="card"><h3>Speed Optimization</h3><p>Fast loading websites</p></div>
+</div>
+
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section">
+<h2>Portfolio</h2>
+
+<div class="grid">
+<div class="card">Corporate Website</div>
+<div class="card">Ecommerce Store</div>
+<div class="card">Startup Landing Page</div>
+<div class="card">News Platform</div>
+</div>
+
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+<h2>Client Testimonials</h2>
+
+<div class="grid">
+<div class="card">⭐⭐⭐⭐⭐ Excellent work – John</div>
+<div class="card">⭐⭐⭐⭐⭐ Very professional – David</div>
+<div class="card">⭐⭐⭐⭐⭐ Great service – Sarah</div>
+</div>
+
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+<h2>Pricing</h2>
+
+<div class="grid">
+<div class="card">
+<h3>Starter</h3>
+<div class="price">$299</div>
+<p>Small business website</p>
+</div>
+
+<div class="card">
+<h3>Professional</h3>
+<div class="price">$799</div>
+<p>Business website</p>
+</div>
+
+<div class="card">
+<h3>Premium</h3>
+<div class="price">$1500</div>
+<p>Custom development</p>
+</div>
+</div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+<h2>Contact Us</h2>
+
+<form id="contactForm">
+<input name="fname" placeholder="First Name" required>
+<input name="lname" placeholder="Last Name" required>
+<input name="email" placeholder="Email" required>
+<input name="phone" placeholder="Phone">
+<textarea name="message" placeholder="Project Details"></textarea>
+
+<button type="submit">Send Message</button>
+
+<div class="success" id="msg" style="display:none;color:green;margin-top:10px;">
+✅ Message Sent Successfully
+</div>
+
+</form>
+</section>
+
+<a class="whatsapp" href="https://wa.me/917028079359" target="_blank">WhatsApp</a>
+
+<footer>
+<p>© 2026 Codesphere Agency — Global Web Development</p>
+</footer>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const data = {
+        fname: this.fname.value,
+        lname: this.lname.value,
+        email: this.email.value,
+        phone: this.phone.value,
+        message: this.message.value
+    };
+
+    fetch("/contact", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(() => {
+        document.getElementById("msg").style.display = "block";
+        this.reset();
+    });
+});
+</script>
+
+</body>
+</html>
