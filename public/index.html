@@ -457,7 +457,34 @@ function toggleChat(){
   box.style.display = box.style.display === "block" ? "none" : "block";
 }
 
-// SEND MESSAGE (AI CONNECT)
+// // SEND MESSAGE (AI CONNECT)
+// async function sendMsg(e){
+//   if(e.key === "Enter"){
+//     let input = document.getElementById("chatInput");
+//     let msg = input.value;
+
+//     document.getElementById("messages").innerHTML += "<div>You: "+msg+"</div>";
+
+//     try{
+//       const res = await fetch("/chat", {
+//         method:"POST",
+//         headers:{ "Content-Type":"application/json" },
+//         body: JSON.stringify({ message: msg })
+//       });
+
+//       const data = await res.json();
+
+//       document.getElementById("messages").innerHTML += "<div>AI: "+data.reply+"</div>";
+
+//     } catch(error){
+//       document.getElementById("messages").innerHTML += "<div>AI: Server error</div>";
+//     }
+
+//     input.value="";
+//   }
+// }
+
+
 async function sendMsg(e){
   if(e.key === "Enter"){
     let input = document.getElementById("chatInput");
@@ -465,25 +492,19 @@ async function sendMsg(e){
 
     document.getElementById("messages").innerHTML += "<div>You: "+msg+"</div>";
 
-    try{
-      const res = await fetch("/chat", {
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify({ message: msg })
-      });
+    const res = await fetch("/chat", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ message: msg })
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      document.getElementById("messages").innerHTML += "<div>AI: "+data.reply+"</div>";
-
-    } catch(error){
-      document.getElementById("messages").innerHTML += "<div>AI: Server error</div>";
-    }
+    document.getElementById("messages").innerHTML += "<div>AI: "+data.reply+"</div>";
 
     input.value="";
   }
 }
-
 </script>
 
 </body>
