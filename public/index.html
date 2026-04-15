@@ -451,27 +451,39 @@ document.getElementById("form").addEventListener("submit", async function(e){
   }
 });
 
-
-// CHAT
+// CHAT TOGGLE
 function toggleChat(){
-let box=document.getElementById("chat-body");
-box.style.display=box.style.display==="block"?"none":"block";
+  let box = document.getElementById("chat-body");
+  box.style.display = box.style.display === "block" ? "none" : "block";
 }
 
-function sendMsg(e){
-if(e.key==="Enter"){
-let input=document.getElementById("chatInput");
-let msg=input.value;
+// SEND MESSAGE (AI CONNECT)
+async function sendMsg(e){
+  if(e.key === "Enter"){
+    let input = document.getElementById("chatInput");
+    let msg = input.value;
 
-document.getElementById("messages").innerHTML += "<div>You: "+msg+"</div>";
+    document.getElementById("messages").innerHTML += "<div>You: "+msg+"</div>";
 
-setTimeout(()=>{
-document.getElementById("messages").innerHTML += "<div>AI: We will contact you soon.</div>";
-},500);
+    try{
+      const res = await fetch("/chat", {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify({ message: msg })
+      });
 
-input.value="";
+      const data = await res.json();
+
+      document.getElementById("messages").innerHTML += "<div>AI: "+data.reply+"</div>";
+
+    } catch(error){
+      document.getElementById("messages").innerHTML += "<div>AI: Server error</div>";
+    }
+
+    input.value="";
+  }
 }
-}
+
 </script>
 
 </body>
