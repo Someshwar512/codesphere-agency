@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Codesphere Agency</title>
+<title>Codesphere</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -175,6 +175,90 @@ overflow:auto;
 font-size:12px;
 margin-bottom:5px;
 }
+
+#c4 {
+  visibility: hidden;
+}
+.logo img{
+  width:120px;
+  height:auto;
+}
+
+/* Mobile responsive */
+@media(max-width:768px){
+  .logo img{
+    width:90px;
+  }
+}
+
+@media(max-width:480px){
+  .logo img{
+    width:70px;
+  }
+}
+
+/* .logo img{
+  width:170px;
+  height:auto;
+  object-fit:contain;
+  filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.6));
+} */
+/* NAVBAR */
+header{
+  background:#050816;
+  padding:10px 0;   /* 🔥 slim height */
+  position:sticky;
+  top:0;
+  z-index:1000;
+  border-bottom:1px solid #1f2937;
+}
+
+/* NAV CONTAINER */
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  max-width:1200px;
+  margin:auto;
+  padding:0 15px;
+}
+
+/* LOGO */
+.logo img{
+  width:150px;
+  height:auto;
+  object-fit:contain;
+}
+
+/* MENU */
+.nav-links{
+  display:flex;
+  align-items:center;
+}
+
+.nav-links a{
+  color:#cbd5f5;
+  text-decoration:none;
+  margin-left:25px;
+  font-size:16px;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  color:#60a5fa;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .logo img{
+    width:110px;
+  }
+
+  .nav-links a{
+    margin-left:15px;
+    font-size:14px;
+  }
+}
 </style>
 </head>
 
@@ -182,8 +266,11 @@ margin-bottom:5px;
 
 <header>
 <nav>
-<div><b>CodesphereAgency</b></div>
+<div class="logo">
+  <img src="logo1.png" alt="Codesphere Logo">
+</div>
 <div>
+<a href="#about">About</a>
 <a href="#services">Services</a>
 <a href="#pricing">Pricing</a>
 <a href="#contact">Contact</a>
@@ -204,12 +291,12 @@ margin-bottom:5px;
 
 <div>
 <span id="c1">0</span>
-<p>Projects</p>
+<p>💼 Projects</p>
 </div>
 
 <div>
 <span id="c2">0</span>
-<p>Clients</p>
+<p>🌎 Global Clients</p>
 </div>
 
 <div>
@@ -217,7 +304,17 @@ margin-bottom:5px;
 <p>Countries</p>
 </div>
 
+<div>
+  <span id="c4">7 Day</span>
+  <p>⚡ Fast Delivery</p>
 </div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+<h2>About Us</h2>
+<p>Codesphere Agency is a professional web development company providing high-quality websites, ecommerce solutions, and custom web applications for businesses worldwide.</p>
 </section>
 
 <!-- SERVICES -->
@@ -317,9 +414,9 @@ margin-bottom:5px;
 // COUNTER
 let c1=0,c2=0,c3=0;
 
-setInterval(()=>{if(c1<65)c1++,document.getElementById("c1").innerText=c1},250);
-setInterval(()=>{if(c2<35)c2++,document.getElementById("c2").innerText=c2},500);
-setInterval(()=>{if(c3<20)c3++,document.getElementById("c3").innerText=c3},750);
+setInterval(()=>{if(c1<65)c1++,document.getElementById("c1").innerText=c1},100);
+setInterval(()=>{if(c2<35)c2++,document.getElementById("c2").innerText=c2},200);
+setInterval(()=>{if(c3<20)c3++,document.getElementById("c3").innerText=c3},300);
 
 // FORM
 
