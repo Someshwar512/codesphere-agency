@@ -272,6 +272,268 @@ input,textarea{
     bottom:10px;
   }
 }
+
+.carousel{
+  position:relative;
+  overflow:hidden;
+  max-width:1100px;
+  margin:auto;
+}
+
+.carousel-track{
+  display:flex;
+  transition:transform 0.5s ease;
+}
+
+.t-card{
+  flex:0 0 33.33%;
+  padding:20px;
+  margin:10px;
+  background:#111827;
+  border-radius:15px;
+  opacity:0.5;
+  transform:scale(0.85);
+  transition:0.4s;
+  text-align:center;
+}
+
+.t-card.active{
+  opacity:1;
+  transform:scale(1.05);
+  background:#1f2937;
+}
+
+.stars{
+  color:#facc15;
+  margin-bottom:10px;
+}
+
+.quote{
+  font-size:14px;
+  margin-bottom:10px;
+}
+
+/* arrows */
+.nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:#2563eb;
+  border:none;
+  color:white;
+  padding:10px;
+  cursor:pointer;
+  border-radius:50%;
+}
+
+.prev{ left:10px; }
+.next{ right:10px; }
+
+/* responsive */
+@media(max-width:1024px){
+  .t-card{ flex:0 0 50%; }
+}
+
+@media(max-width:768px){
+  .t-card{ flex:0 0 100%; }
+  .nav{ display:none; }
+}
+
+/* FAQ BOX */
+.faq-box{
+  max-width:800px;
+  margin:auto;
+  text-align:left;
+}
+
+.faq-item{
+  background:#111827;
+  margin-bottom:10px;
+  padding:15px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.faq-item:hover{
+  background:#1f2937;
+}
+
+.faq-question{
+  font-weight:600;
+}
+
+.faq-answer{
+  display:none;
+  color:#9ca3af;
+  margin-top:8px;
+}
+
+/* CTA */
+.cta{
+  padding:80px 20px;
+}
+
+.cta-box{
+  max-width:900px;
+  margin:auto;
+  background:linear-gradient(135deg,#2563eb,#9333ea);
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 10px 40px rgba(0,0,0,0.4);
+  animation:fadeUp 1s ease;
+}
+
+.cta-box h2{
+  font-size:28px;
+}
+
+.cta-box p{
+  margin:10px 0;
+  color:#e5e7eb;
+}
+
+/* FOOTER */
+.footer{
+  background:#050816;
+  padding:50px 20px;
+}
+
+.footer-grid{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+}
+
+.footer a{
+  display:block;
+  color:#9ca3af;
+  text-decoration:none;
+  margin:5px 0;
+}
+
+.footer a:hover{
+  color:#60a5fa;
+}
+
+.footer-bottom{
+  text-align:center;
+  margin-top:30px;
+  color:#6b7280;
+}
+
+/* ANIMATION */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s;
+}
+
+.fade.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .footer-grid{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .cta-box h2{
+    font-size:22px;
+  }
+}
+/* ===== IMPROVED SECTION SPACING ===== */
+.section{
+  max-width:1100px;
+  margin:auto;
+  padding:90px 20px 70px;
+  text-align:center;
+}
+
+/* ===== HEADINGS (VERY IMPORTANT) ===== */
+.section h2{
+  font-size:34px;
+  margin-bottom:25px;
+  position:relative;
+  display:inline-block;
+  font-weight:600;
+}
+
+/* underline animation */
+.section h2::after{
+  content:"";
+  width:50%;
+  height:3px;
+  background:linear-gradient(90deg,#2563eb,#60a5fa);
+  position:absolute;
+  left:25%;
+  bottom:-10px;
+  border-radius:10px;
+}
+
+/* ===== ABOUT TEXT FIX ===== */
+#about p{
+  max-width:750px;
+  margin:20px auto 0;
+  line-height:1.7;
+  color:#cbd5f5;
+  font-size:15px;
+}
+
+/* ===== SERVICES FIX ===== */
+#services{
+  margin-top:30px;
+}
+
+#services .grid{
+  margin-top:40px;
+}
+
+/* ===== CARD IMPROVEMENT ===== */
+.card{
+  background:#111827;
+  padding:25px 20px;
+  border-radius:12px;
+  border:1px solid #1f2937;
+  transition:0.3s;
+  text-align:center;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+  border-color:#2563eb;
+  box-shadow:0 10px 30px rgba(37,99,235,0.2);
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+.card p{
+  color:#9ca3af;
+  font-size:14px;
+}
+
+/* ===== ADD SPACE BETWEEN SECTIONS ===== */
+#about{
+  margin-bottom:20px;
+}
+
+#services{
+  margin-top:20px;
+}
 </style>
 </head>
 
@@ -365,6 +627,103 @@ input,textarea{
   </div>
 </div>
 </section>
+<!-- CLIENT SUCCESS STORIES -->
+<section class="testimonials" id="testimonials">
+
+  <div class="section">
+
+    <h2 class="section-title">Client Success Stories</h2>
+    <p class="section-subtitle">
+      Real results from businesses who trusted Codesphere.
+    </p>
+
+    <div class="carousel">
+
+      <button class="nav prev">&#10094;</button>
+
+      <div class="carousel-track">
+
+        <!-- 12 CLIENTS -->
+        <div class="t-card active">
+          <div class="stars">★★★★★</div>
+          <p class="quote">Amazing website & fast delivery.</p>
+          <h4>Rahul Mehta</h4>
+        </div>
+
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">Perfect ecommerce solution.</p>
+          <h4>Priya Sharma</h4>
+        </div>
+
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">SEO improved a lot.</p>
+          <h4>Amit Joshi</h4>
+        </div>
+
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">Professional team.</p>
+          <h4>Neha Patil</h4>
+        </div>
+
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">Highly recommended.</p>
+          <h4>Rohan Deshmukh</h4>
+        </div>
+
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">Great UI design.</p>
+          <h4>Simran Kaur</h4>
+        </div>
+
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">Fast & reliable.</p>
+          <h4>Vikram Singh</h4>
+        </div>
+
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">Loved the design.</p>
+          <h4>Anjali Verma</h4>
+        </div>
+
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">Top agency work.</p>
+          <h4>Karan Shah</h4>
+        </div>
+
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">Perfect mobile UI.</p>
+          <h4>Pooja Nair</h4>
+        </div>
+
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">Great support.</p>
+          <h4>Arjun Gupta</h4>
+        </div>
+
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">Loved everything!</p>
+          <h4>Sneha Kulkarni</h4>
+        </div>
+
+      </div>
+
+      <button class="nav next">&#10095;</button>
+
+    </div>
+
+  </div>
+</section>
 
 <!-- CONTACT -->
 <section class="section" id="contact">
@@ -401,6 +760,74 @@ input,textarea{
     <input id="chatInput" onkeypress="sendMsg(event)" placeholder="Ask...">
   </div>
 </div>
+
+<!-- FAQ -->
+<section class="section fade">
+  <h2 class="section-title">Frequently Asked Questions</h2>
+
+  <div class="faq-box">
+
+    <div class="faq-item">
+      <div class="faq-question">How long does a website take?</div>
+      <div class="faq-answer">Usually 5–10 days depending on project complexity.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Do you provide hosting?</div>
+      <div class="faq-answer">Yes, we help with domain, hosting & deployment.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Is it mobile responsive?</div>
+      <div class="faq-answer">100% responsive across mobile, tablet & desktop.</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="cta fade">
+  <div class="cta-box">
+    <h2>Let’s Build Something Amazing 🚀</h2>
+    <p>Start your project today and grow your business online.</p>
+    <button class="btn">Start Project</button>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <div class="footer-grid">
+
+    <div>
+      <h3>CodesphereAgency</h3>
+      <p>We create modern, high-converting websites for businesses worldwide.</p>
+    </div>
+
+    <div>
+      <h4>Quick Links</h4>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div>
+      <h4>Contact</h4>
+      <p>Email: your@email.com</p>
+      <p>Phone: +91 7028079359</p>
+    </div>
+
+  </div>
+
+  <p class="footer-bottom">© 2026 CodesphereAgency. All rights reserved.</p>
+
+</footer>
+
+
+
 
 <script>
 // COUNTER
@@ -464,6 +891,75 @@ async function sendMsg(e){
     input.value="";
   }
 }
+
+const track = document.querySelector('.carousel-track');
+const cards = document.querySelectorAll('.t-card');
+
+let index = 0;
+
+function update(){
+  const width = cards[0].offsetWidth;
+  track.style.transform = `translateX(-${index * width}px)`;
+
+  cards.forEach(c => c.classList.remove('active'));
+  if(cards[index]) cards[index].classList.add('active');
+}
+
+/* auto slide */
+setInterval(()=>{
+  index = (index + 1) % cards.length;
+  update();
+}, 3000);
+
+/* arrows */
+document.querySelector('.next').onclick = ()=>{
+  index = (index + 1) % cards.length;
+  update();
+};
+
+document.querySelector('.prev').onclick = ()=>{
+  index = (index - 1 + cards.length) % cards.length;
+  update();
+};
+
+/* swipe */
+let startX = 0;
+
+track.addEventListener("touchstart", e=>{
+  startX = e.touches[0].clientX;
+});
+
+track.addEventListener("touchend", e=>{
+  let endX = e.changedTouches[0].clientX;
+
+  if(startX - endX > 50) index++;
+  else if(endX - startX > 50) index--;
+
+  index = (index + cards.length) % cards.length;
+  update();
+});
+
+
+/* FAQ TOGGLE */
+document.querySelectorAll(".faq-item").forEach(item=>{
+  item.addEventListener("click", ()=>{
+    let ans = item.querySelector(".faq-answer");
+    ans.style.display = ans.style.display === "block" ? "none" : "block";
+  });
+});
+
+/* SCROLL ANIMATION */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+});
+
+document.querySelectorAll(".fade").forEach(el=>{
+  observer.observe(el);
+});
 </script>
 
 </body>
