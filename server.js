@@ -83,7 +83,7 @@ app.post("/chat", (req, res) => {
     reply = "We offer Web Development, UI/UX, Ecommerce & SEO 🚀";
   }
   else if(msg.includes("contact")){
-    reply = "You can contact us via form or WhatsApp 📞";
+    reply = "You can contact us via form or WhatsApp 📞 7028079359";
   }
   else if(msg.includes("website")){
     reply = "Yes, we build modern websites for businesses 💻";
