@@ -52,20 +52,61 @@ app.get("/", (req, res) => {
 });
 
 app.post("/contact", (req, res) => {
-    const { fname, lname, email, phone, message } = req.body;
+  const { fname, lname, email, phone, message } = req.body;
 
-    const sql = `
-        INSERT INTO leads (fname, lname, email, phone, message)
-        VALUES (?, ?, ?, ?, ?)
+  // VALIDATION
+  if (!fname || !email || !message) {
+    return res.send("error");
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[6-9]\d{9}$/;
+
+  if (!emailRegex.test(email)) {
+    return res.send("error");
+  }
+
+  if (phone && !phoneRegex.test(phone)) {
+    return res.send("error");
+  }
+
+  // ✅ FIXED DUPLICATE CHECK
+  let checkQuery = "";
+  let values = [];
+
+  if (phone) {
+    checkQuery = `SELECT id FROM leads WHERE email = ? OR phone = ?`;
+    values = [email, phone];
+  } else {
+    checkQuery = `SELECT id FROM leads WHERE email = ?`;
+    values = [email];
+  }
+
+  db.query(checkQuery, values, (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.send("error");
+    }
+
+    if (result.length > 0) {
+      return res.send("duplicate");
+    }
+
+    // ✅ INSERT DATA
+    const insertQuery = `
+      INSERT INTO leads (fname, lname, email, phone, message)
+      VALUES (?, ?, ?, ?, ?)
     `;
 
-    db.query(sql, [fname, lname, email, phone, message], (err) => {
-        if (err) {
-            console.log("Insert Error:", err);
-            return res.status(500).send("error");
-        }
-        return res.send("success");
+    db.query(insertQuery, [fname, lname, email, phone || null, message], (err2) => {
+      if (err2) {
+        console.log(err2);
+        return res.send("error");
+      }
+
+      res.send("success");
     });
+  });
 });
 
 app.post("/chat", (req, res) => {

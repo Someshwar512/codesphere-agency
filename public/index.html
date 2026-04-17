@@ -162,8 +162,11 @@ input,textarea{
 
 .success{
   display:none;
-  color:#22c55e;
   margin-top:10px;
+  font-weight:500;
+  transition:0.4s;
+  opacity:0;
+  transform:translateY(-10px);
 }
 
 /* WHATSAPP */
@@ -743,7 +746,7 @@ input,textarea{
 
 <textarea name="message" placeholder="Message" required></textarea>
 
-<button type="submit" class="btn">Send Message</button>
+<button type="submit" class="btn" id="submitBtn">Send Message</button>
 <div class="success" id="msg">Message Sent Successfully</div>
 
 </form>
@@ -836,35 +839,99 @@ let c1=0,c2=0,c3=0;
 setInterval(()=>{if(c1<65)c1++,document.getElementById("c1").innerText=c1},100);
 setInterval(()=>{if(c2<35)c2++,document.getElementById("c2").innerText=c2},200);
 setInterval(()=>{if(c3<20)c3++,document.getElementById("c3").innerText=c3},300);
+let isSubmitting = false;
 
-// FORM
 document.getElementById("form").addEventListener("submit", async function(e){
   e.preventDefault();
 
+  if(isSubmitting) return;
+  isSubmitting = true;
+
+  const btn = document.getElementById("submitBtn");
+  const msgBox = document.getElementById("msg");
+
+  btn.disabled = true;
+
   const data = {
-    fname:this.fname.value,
-    lname:this.lname.value,
-    email:this.email.value,
-    phone:this.phone.value,
-    message:this.message.value
+    fname: this.fname.value.trim(),
+    lname: this.lname.value.trim(),
+    email: this.email.value.trim(),
+    phone: this.phone.value.trim(),
+    message: this.message.value.trim()
   };
 
-  const res = await fetch("/contact", {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(data)
-  });
+  // VALIDATION
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[6-9]\d{9}$/;
 
-  const result = await res.text();
+  if(!data.fname || data.fname.length < 2){
+    return showMsg("❌ Enter valid name", "error");
+  }
 
-  if(result === "success"){
-    document.getElementById("msg").style.display="block";
-    this.reset();
-  }else{
-    alert("Data not saved");
+  if(!emailRegex.test(data.email)){
+    return showMsg("❌ Invalid email address", "error");
+  }
+
+  if(data.phone && !phoneRegex.test(data.phone)){
+    return showMsg("❌ Invalid phone number", "error");
+  }
+
+  if(!data.message || data.message.length < 5){
+    return showMsg("❌ Message too short", "error");
+  }
+
+  try{
+    const res = await fetch("/contact", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(data)
+    });
+
+    const result = await res.text();
+
+    if(result === "success"){
+      showMsg("✅ Message Sent Successfully", "success");
+      document.getElementById("form").reset();
+    }
+    else if(result === "duplicate"){
+      showMsg("⚠️ Already submitted with this email/phone", "warning");
+    }
+    else{
+      showMsg("❌ Error saving data", "error");
+    }
+
+  }catch(err){
+    showMsg("❌ Server error", "error");
+  }
+
+  reset();
+
+  function reset(){
+    btn.disabled = false;
+    isSubmitting = false;
+  }
+
+  function showMsg(text, type){
+    msgBox.innerText = text;
+    msgBox.style.display = "block";
+
+    if(type === "success") msgBox.style.color = "#22c55e";
+    if(type === "error") msgBox.style.color = "#ef4444";
+    if(type === "warning") msgBox.style.color = "#facc15";
+
+    msgBox.style.opacity = "1";
+    msgBox.style.transform = "translateY(0)";
+
+    setTimeout(()=>{
+      msgBox.style.opacity = "0";
+      msgBox.style.transform = "translateY(-10px)";
+    },3000);
+
+    setTimeout(()=>{
+      msgBox.style.display = "none";
+    },3500);
   }
 });
-
 // CHAT
 function toggleChat(){
   let box=document.getElementById("chat-body");

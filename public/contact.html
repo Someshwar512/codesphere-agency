@@ -94,12 +94,43 @@ border:none;
 border-radius:6px;
 color:white;
 cursor:pointer;
+transition:0.3s;
 }
 
-.success{
+.btn:hover{
+transform:scale(1.05);
+}
+
+/* MESSAGE UI */
+.msg{
 display:none;
+margin-top:15px;
+padding:12px;
+border-radius:6px;
+font-size:14px;
+}
+
+.msg.success{
+background:#052e16;
 color:#22c55e;
-margin-top:10px;
+border:1px solid #16a34a;
+}
+
+.msg.duplicate{
+background:#3f1d1d;
+color:#f87171;
+border:1px solid #dc2626;
+}
+
+.msg.error{
+background:#1e293b;
+color:#facc15;
+border:1px solid #f59e0b;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+.row{flex-direction:column;}
 }
 </style>
 </head>
@@ -140,46 +171,94 @@ margin-top:10px;
 
 <textarea name="message" placeholder="Project Details" required></textarea>
 
-<button type="submit" class="btn">Send Message</button>
+<button type="submit" class="btn" id="submitBtn">Send Message</button>
 
-<div class="success" id="msg">✅ Message Sent Successfully</div>
+<div id="msgBox" class="msg"></div>
 
 </form>
 
 </section>
 
 <script>
+let isSubmitting = false;
+
 document.getElementById("form").addEventListener("submit", async function(e){
   e.preventDefault();
 
+  if(isSubmitting) return;
+  isSubmitting = true;
+
+  const btn = document.getElementById("submitBtn");
+  const msgBox = document.getElementById("msgBox");
+
+  btn.disabled = true;
+  btn.innerText = "Sending...";
+
   const data = {
-    fname: this.fname.value,
-    lname: this.lname.value,
-    email: this.email.value,
-    phone: this.phone.value,
-    message: this.message.value
+    fname: this.fname.value.trim(),
+    lname: this.lname.value.trim(),
+    email: this.email.value.trim(),
+    phone: this.phone.value.trim(),
+    message: this.message.value.trim()
   };
 
-  const res = await fetch("/contact", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  });
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[6-9]\d{9}$/;
 
-  const result = await res.text();
+  if(!data.fname || data.fname.length < 2){
+    return reset("Enter valid name", "error");
+  }
 
-  console.log("Server:", result);
+  if(!emailRegex.test(data.email)){
+    return reset("Invalid email address", "error");
+  }
 
-  if(result === "success"){
-    document.getElementById("msg").style.display = "block";
-    this.reset();
-  } else {
-    alert("Data not saved");
+  if(data.phone && !phoneRegex.test(data.phone)){
+    return reset("Invalid phone number", "error");
+  }
+
+  if(!data.message || data.message.length < 5){
+    return reset("Message too short", "error");
+  }
+
+  try{
+    const res = await fetch("/contact", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(data)
+    });
+
+    const result = await res.text();
+
+    if(result === "success"){
+      reset("✅ Message sent successfully!", "success");
+      document.getElementById("form").reset();
+    }
+    else if(result === "duplicate"){
+      reset("⚠️ You already submitted this contact.", "duplicate");
+    }
+    else{
+      reset("❌ Something went wrong", "error");
+    }
+
+  }catch(err){
+    reset("❌ Server error", "error");
+  }
+
+  function reset(message, type){
+    msgBox.innerText = message;
+    msgBox.className = "msg " + type;
+    msgBox.style.display = "block";
+
+    btn.disabled = false;
+    btn.innerText = "Send Message";
+    isSubmitting = false;
+
+    setTimeout(()=>{
+      msgBox.style.display = "none";
+    }, 4000);
   }
 });
-
 </script>
 
 </body>
