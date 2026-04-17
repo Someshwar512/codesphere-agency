@@ -1,8 +1,9 @@
 const express = require("express");
 const mysql = require("mysql2");
 const path = require("path");
-
+const nodemailer = require("nodemailer");
 const app = express();
+require("dotenv").config();
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -46,6 +47,15 @@ db.query(createTableQuery, (err) => {
     }
 });
 
+// EMAIL SETUP
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
 // Routes
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -70,38 +80,64 @@ app.post("/contact", (req, res) => {
     return res.send("error");
   }
 
-  // ✅ FIXED DUPLICATE CHECK
-  let checkQuery = "";
-  let values = [];
+  // CHECK DUPLICATE
+  const checkQuery = `
+    SELECT * FROM leads 
+    WHERE email = ? OR phone = ?
+  `;
 
-  if (phone) {
-    checkQuery = `SELECT id FROM leads WHERE email = ? OR phone = ?`;
-    values = [email, phone];
-  } else {
-    checkQuery = `SELECT id FROM leads WHERE email = ?`;
-    values = [email];
-  }
-
-  db.query(checkQuery, values, (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.send("error");
-    }
+  db.query(checkQuery, [email, phone], (err, result) => {
+    if (err) return res.send("error");
 
     if (result.length > 0) {
       return res.send("duplicate");
     }
 
-    // ✅ INSERT DATA
+    // INSERT DATA
     const insertQuery = `
       INSERT INTO leads (fname, lname, email, phone, message)
       VALUES (?, ?, ?, ?, ?)
     `;
 
-    db.query(insertQuery, [fname, lname, email, phone || null, message], (err2) => {
-      if (err2) {
-        console.log(err2);
-        return res.send("error");
+    db.query(insertQuery, [fname, lname, email, phone, message], async (err2) => {
+      if (err2) return res.send("error");
+
+      // ================= EMAIL PART =================
+
+      try {
+        // 1. EMAIL TO YOU (NEW LEAD)
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: process.env.EMAIL_USER,
+          subject: "🚀 New Lead - Codesphere",
+          html: `
+            <h2>New Client Inquiry</h2>
+            <p><b>Name:</b> ${fname} ${lname}</p>
+            <p><b>Email:</b> ${email}</p>
+            <p><b>Phone:</b> ${phone}</p>
+            <p><b>Message:</b> ${message}</p>
+          `
+        });
+
+        // 2. EMAIL TO CLIENT (CONFIRMATION)
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: email,
+          subject: "✅ We received your message - Codesphere",
+          html: `
+            <h2>Hello ${fname},</h2>
+            <p>Thank you for contacting <b>Codesphere Agency</b>.</p>
+            <p>We have received your message and will contact you soon.</p>
+            <br>
+            <p><b>Your Message:</b></p>
+            <p>${message}</p>
+            <br>
+            <p>Regards,<br>Codesphere Team 🚀</p>
+          `
+        });
+
+      } catch (mailErr) {
+        console.log("Mail Error:", mailErr);
       }
 
       res.send("success");
