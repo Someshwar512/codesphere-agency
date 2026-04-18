@@ -38,7 +38,6 @@ nav{
   max-width:1200px;
   margin:auto;
   padding:0 15px;
-  flex-wrap:wrap;
 }
 
 .logo img{
@@ -221,16 +220,7 @@ input,textarea{
     font-size:28px;
   }
 
-  nav{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:10px;
-  }
 
-  nav div a{
-    margin-left:10px;
-    font-size:14px;
-  }
 
   .row{
     flex-direction:column;
@@ -537,24 +527,113 @@ input,textarea{
 #services{
   margin-top:20px;
 }
+
+/* ===== MOBILE NAV FIX ===== */
+
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* desktop menu */
+.desktop-menu a{
+  margin-left:20px;
+}
+
+/* hamburger */
+.menu-toggle{
+  display:none;
+  font-size:24px;
+  cursor:pointer;
+}
+
+/* sidebar */
+.mobile-menu{
+  position:fixed;
+  top:0;
+  right:-220px;
+  width:150px;
+  height:100%;
+  background:#111827;
+  padding-top:60px;
+  transition:0.3s ease;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+}
+
+.mobile-menu a{
+  padding:12px 20px;
+  color:#cbd5f5;
+  text-decoration:none;
+}
+
+.mobile-menu a:hover{
+  color:#60a5fa;
+}
+
+/* close button */
+.close-btn{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:26px;
+  cursor:pointer;
+}
+
+/* MOBILE ONLY */
+@media(max-width:768px){
+
+  .desktop-menu{
+  display:flex;
+}
+
+@media(max-width:768px){
+  .desktop-menu{
+    display:none;
+  }
+
+  .menu-toggle{
+    display:block;
+  }
+}
+  /* show hamburger */
+  .menu-toggle{
+    display:block;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<nav>
+<nav class="navbar">
   <div class="logo">
     <img src="codespherelogo.jpeg" alt="Codesphere Logo">
   </div>
 
-  <div>
+  <!-- hamburger -->
+  <div class="menu-toggle" onclick="openNav()">☰</div>
+
+  <!-- desktop menu -->
+  <div class="desktop-menu">
     <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#pricing">Pricing</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
+
+<!-- MOBILE SIDEBAR -->
+<div id="mobileMenu" class="mobile-menu">
+  <span class="close-btn" onclick="closeNav()">☰</span>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#contact">Contact</a>
+</div>
 </header>
 
 <!-- HERO -->
@@ -1027,6 +1106,14 @@ const observer = new IntersectionObserver(entries=>{
 document.querySelectorAll(".fade").forEach(el=>{
   observer.observe(el);
 });
+
+function openNav(){
+  document.getElementById("mobileMenu").style.right = "0";
+}
+
+function closeNav(){
+  document.getElementById("mobileMenu").style.right = "-220px";
+}
 </script>
 
 </body>
