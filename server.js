@@ -10,6 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
+//Databse Connections Backend
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -56,11 +57,12 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Routes
+// Mian Routes
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+//Contact us API
 app.post("/contact", (req, res) => {
   const { fname, lname, email, phone, message } = req.body;
 
@@ -145,6 +147,7 @@ app.post("/contact", (req, res) => {
   });
 });
 
+//ChatBot API
 app.post("/chat", (req, res) => {
   const msg = req.body.message.toLowerCase();
 
