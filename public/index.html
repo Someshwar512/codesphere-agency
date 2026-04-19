@@ -603,6 +603,22 @@ input,textarea{
     display:block;
   }
 }
+
+.loader {
+  border: 2px solid #fff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  animation: spin 0.6s linear infinite;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 </style>
 </head>
 
@@ -928,8 +944,8 @@ document.getElementById("form").addEventListener("submit", async function(e){
 
   const btn = document.getElementById("submitBtn");
   const msgBox = document.getElementById("msg");
-
-  btn.disabled = true;
+btn.disabled = true;
+btn.innerHTML = `<span class="loader"></span> Sending...`;
 
   const data = {
     fname: this.fname.value.trim(),
@@ -984,12 +1000,11 @@ document.getElementById("form").addEventListener("submit", async function(e){
   }
 
   reset();
-
-  function reset(){
-    btn.disabled = false;
-    isSubmitting = false;
-  }
-
+function reset(){
+  btn.disabled = false;
+  btn.innerHTML = "Send Message";
+  isSubmitting = false;
+}
   function showMsg(text, type){
     msgBox.innerText = text;
     msgBox.style.display = "block";
@@ -1023,7 +1038,7 @@ async function sendMsg(e){
     let msg=input.value;
 
     document.getElementById("messages").innerHTML += "<div>You: "+msg+"</div>";
-
+  await new Promise(resolve => setTimeout(resolve, 300));
     const res=await fetch("/chat",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
