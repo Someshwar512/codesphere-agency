@@ -952,7 +952,7 @@ input,textarea{
   <div class="cta-box">
     <h2>Let’s Build Something Amazing 🚀</h2>
     <p>Start your project today and grow your business online.</p>
-    <button class="btn">Start Project</button>
+ <button class="btn" onclick="scrollToContact()">Start Project</button>
   </div>
 </section>
 
@@ -1203,6 +1203,11 @@ function openNav(){
 
 function closeNav(){
   document.getElementById("mobileMenu").style.right = "-220px";
+}
+function scrollToContact(){
+  document.getElementById("contact").scrollIntoView({
+    behavior: "smooth"
+  });
 }
 </script>
 
