@@ -6,7 +6,7 @@
 <title>Codesphere</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *{
   margin:0;
@@ -619,6 +619,69 @@ input,textarea{
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+.footer-contact{
+  text-align:center;
+}
+
+/* phone spacing */
+.footer-contact .phone{
+  margin:10px 0 15px;
+  color:#cbd5f5;
+  font-size:15px;
+}
+
+/* SOCIAL ICONS */
+.footer-social{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+/* ICON STYLE */
+.footer-social a{
+  width:48px;
+  height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  font-size:20px;
+  color:#fff;
+  transition:0.3s;
+}
+
+/* COLORS */
+.footer-social a:nth-child(1){ background:#E1306C; }
+.footer-social a:nth-child(2){ background:#25D366; }
+.footer-social a:nth-child(3){ background:#0077B5; }
+
+/* HOVER */
+.footer-social a:hover{
+  transform:scale(1.1);
+}
+
+/* MOBILE FIX */
+@media(max-width:768px){
+  .footer-contact{
+    margin-top:20px;
+  }
+
+  .footer-social a{
+    width:42px;
+    height:42px;
+    font-size:18px;
+  }
+}
+
+@media(max-width:480px){
+  .footer-social a{
+    width:38px;
+    height:38px;
+    font-size:16px;
+  }
+}
 </style>
 </head>
 
@@ -912,12 +975,24 @@ input,textarea{
       <a href="#contact">Contact</a>
     </div>
 
-    <div>
-      <h4>Contact</h4>
-      <p>Email: sonusolat512@gmail.com</p>
-      <p>Phone: +91 7028079359</p>
-    </div>
+<div class="footer-contact">
+  <h4>Contact</h4>
+  <p class="phone">+91 7028079359</p>
 
+  <div class="footer-social">
+    <a href="https://instagram.com/codesphereagency" target="_blank">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <a href="https://wa.me/917028079359" target="_blank">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <a href="https://linkedin.com/in/sonusolat" target="_blank">
+      <i class="fa-brands fa-linkedin"></i>
+    </a>
+  </div>
+</div>
   </div>
 
   <p class="footer-bottom">© 2026 CodesphereAgency. All rights reserved.</p>
