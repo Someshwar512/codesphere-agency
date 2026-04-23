@@ -682,6 +682,61 @@ input,textarea{
     font-size:16px;
   }
 }
+
+/* ===== PRO STATS UI ===== */
+
+.stats-pro{
+  text-align:center;
+}
+
+.stats-pro h2{
+  margin-bottom:40px;
+}
+
+/* GRID */
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:30px;
+}
+
+/* CARD */
+.stat-card{
+  background:#111827;
+  padding:30px 20px;
+  border-radius:15px;
+  border:1px solid #1f2937;
+  transition:0.3s;
+}
+
+.stat-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 10px 30px rgba(37,99,235,0.3);
+  border-color:#2563eb;
+}
+
+/* CIRCLE GRAPH */
+.circle{
+  width:90px;
+  height:90px;
+  margin:auto;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:600;
+  color:#60a5fa;
+  background:conic-gradient(#2563eb 0%, #1f2937 0%);
+  transition:1s;
+}
+
+/* TEXT */
+.stat-card p{
+  margin-top:15px;
+  color:#9ca3af;
+  font-size:14px;
+}
 </style>
 </head>
 
@@ -723,14 +778,36 @@ input,textarea{
 </section>
 
 <!-- STATS -->
-<section class="section">
-<div class="stats">
-  <div><span id="c1">0</span><p> Projects</p></div>
-  <div><span id="c2">0</span><p> Clients</p></div>
-  <div><span id="c3">0</span><p> Countries</p></div>
-</div>
-</section>
+<section class="section stats-pro">
 
+  <h2>Our Achievements</h2>
+
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <div class="circle">
+        <span id="c1">0</span>
+      </div>
+      <p>Projects Completed</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="circle">
+        <span id="c2">0</span>
+      </div>
+      <p>Happy Clients</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="circle">
+        <span id="c3">0</span>
+      </div>
+      <p>Countries Served</p>
+    </div>
+
+  </div>
+
+</section>
 <!-- ABOUT -->
 <section class="section" id="about">
 <h2>About Us</h2>
@@ -1027,11 +1104,35 @@ input,textarea{
 
 <script>
 // COUNTER
+
 let c1=0,c2=0,c3=0;
 
-setInterval(()=>{if(c1<65)c1++,document.getElementById("c1").innerText=c1},100);
-setInterval(()=>{if(c2<35)c2++,document.getElementById("c2").innerText=c2},200);
-setInterval(()=>{if(c3<20)c3++,document.getElementById("c3").innerText=c3},300);
+function animateCounter(id, target, speed, circle){
+  let count = 0;
+
+  let interval = setInterval(()=>{
+    if(count >= target){
+      clearInterval(interval);
+    }else{
+      count++;
+      document.getElementById(id).innerText = count;
+
+      // update circle progress
+      let percent = (count / target) * 100;
+      circle.style.background =
+        `conic-gradient(#2563eb ${percent}%, #1f2937 ${percent}%)`;
+    }
+  }, speed);
+}
+
+/* start animation when page loads */
+window.onload = ()=>{
+  const circles = document.querySelectorAll(".circle");
+
+  animateCounter("c1", 65, 150, circles[0]);
+  animateCounter("c2", 35, 300, circles[1]);
+  animateCounter("c3", 20, 450, circles[2]);
+};
 let isSubmitting = false;
 
 document.getElementById("form").addEventListener("submit", async function(e){
