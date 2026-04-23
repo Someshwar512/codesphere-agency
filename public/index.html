@@ -737,6 +737,151 @@ input,textarea{
   color:#9ca3af;
   font-size:14px;
 }
+/* ===== POPUP MODAL ===== */
+
+.popup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.popup-content{
+  width:90%;
+  max-width:700px;
+  height:80%;
+  background:#111827;
+  border-radius:15px;
+  overflow:hidden;
+  position:relative;
+  animation:popupFade 0.3s ease;
+}
+
+.popup-content iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+.close-popup{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:22px;
+  cursor:pointer;
+  color:white;
+}
+
+@keyframes popupFade{
+  from{
+    transform:scale(0.8);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+/* ===== ONE SECTION SERVICES (PRO) ===== */
+
+.services-wrapper{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+  margin-top:40px;
+  flex-wrap:wrap;
+}
+
+/* LEFT TEXT */
+.services-text{
+  flex:1;
+  min-width:280px;
+  text-align:left;
+}
+
+.services-text h3{
+  font-size:24px;
+  margin-bottom:15px;
+}
+
+.services-text p{
+  color:#9ca3af;
+  margin-bottom:20px;
+  line-height:1.6;
+}
+
+/* RIGHT GRID */
+.services-cards{
+  flex:1;
+  min-width:280px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+/* SMALL BOX */
+.service-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:#111827;
+  padding:25px;
+  border-radius:12px;
+  border:1px solid #1f2937;
+  text-decoration:none;
+  color:#fff;
+  transition:0.3s;
+}
+
+/* ICON */
+.service-box i{
+  font-size:22px;
+  margin-bottom:8px;
+  color:#60a5fa;
+}
+
+/* TEXT */
+.service-box span{
+  font-size:14px;
+}
+
+/* HOVER */
+.service-box:hover{
+  transform:translateY(-8px);
+  border-color:#2563eb;
+  box-shadow:0 10px 30px rgba(37,99,235,0.3);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .services-wrapper{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .services-text{
+    text-align:center;
+  }
+
+  .services-cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:480px){
+  .services-cards{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 
@@ -774,7 +919,7 @@ input,textarea{
 <section class="hero">
 <h1>We Build High-Converting Websites</h1>
 <p>Modern web solutions for businesses & startups</p>
-<button class="btn">Start Your Project</button>
+<button class="btn" onclick="openPopup()">Start Your Project</button>
 </section>
 
 <!-- STATS -->
@@ -814,31 +959,50 @@ input,textarea{
 <p>Codesphere Agency is a professional web development company providing high-quality websites, ecommerce solutions, and custom web applications for businesses worldwide.</p>
 </section>
 
-<!-- SERVICES -->
-<section class="section" id="services">
+<section class="section services-pro" id="services">
+
 <h2>Our Services</h2>
 
-<div class="grid">
-  <a href="uiux.html" class="card">
-    <h3>UI/UX Design</h3>
-    <p>Modern interface design</p>
-  </a>
+<div class="services-wrapper">
 
-  <a href="webdev.html" class="card">
-    <h3>Web Development</h3>
-    <p>Full stack websites</p>
-  </a>
+  <!-- LEFT SIDE (TEXT) -->
+  <div class="services-text fade">
+    <h3>Complete Digital Solutions</h3>
+    <p>
+      We provide end-to-end web solutions including design, development,
+      ecommerce and SEO to help your business grow online.
+    </p>
 
-  <a href="ecommerce.html" class="card">
-    <h3>Ecommerce</h3>
-    <p>Online store solutions</p>
-  </a>
+    <button class="btn" onclick="scrollToContact()">Start Your Project</button>
+  </div>
 
-  <a href="seo.html" class="card">
-    <h3>SEO</h3>
-    <p>Google ranking boost</p>
-  </a>
+  <!-- RIGHT SIDE (CARDS GRID) -->
+  <div class="services-cards fade">
+
+    <a href="uiux.html" class="service-box">
+      <i class="fa-solid fa-pen-ruler"></i>
+      <span>UI/UX Design</span>
+    </a>
+
+    <a href="webdev.html" class="service-box">
+      <i class="fa-solid fa-code"></i>
+      <span>Web Development</span>
+    </a>
+
+    <a href="ecommerce.html" class="service-box">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span>Ecommerce</span>
+    </a>
+
+    <a href="seo.html" class="service-box">
+      <i class="fa-solid fa-chart-line"></i>
+      <span>SEO</span>
+    </a>
+
+  </div>
+
 </div>
+
 </section>
 
 <!-- PRICING -->
@@ -1333,7 +1497,34 @@ function scrollToContact(){
     behavior: "smooth"
   });
 }
+
+function openPopup(){
+  document.getElementById("contactPopup").style.display = "flex";
+}
+
+function closePopup(){
+  document.getElementById("contactPopup").style.display = "none";
+}
+
+/* click outside close */
+window.onclick = function(e){
+  const popup = document.getElementById("contactPopup");
+  if(e.target === popup){
+    popup.style.display = "none";
+  }
+}
 </script>
 
+
+<!-- CONTACT POPUP -->
+<div id="contactPopup" class="popup">
+  <div class="popup-content">
+
+    <span class="close-popup" onclick="closePopup()">✕</span>
+
+    <iframe src="contact.html"></iframe>
+
+  </div>
+</div>
 </body>
 </html>
