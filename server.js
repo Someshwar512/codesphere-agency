@@ -73,6 +73,7 @@ app.post("/contact", (req, res) => {
     return res.send("error");
   }
 
+  //Email and Phone number frontend Vaildations
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^[6-9]\d{9}$/;
 
