@@ -1,1530 +1,1539 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Codesphere</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Poppins;
-  scroll-behavior:smooth;
-}
-
-body{
-  background:#0b0f1a;
-  color:#fff;
-}
-
-/* HEADER */
-header{
-  background:#050816;
-  padding:10px 0;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  border-bottom:1px solid #1f2937;
-}
-
-nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  max-width:1200px;
-  margin:auto;
-  padding:0 15px;
-}
-
-.logo img{
-  width:100px;
-  height:auto;
-}
-
-/* NAV LINKS */
-nav div a{
-  color:#cbd5f5;
-  text-decoration:none;
-  margin-left:20px;
-  font-size:16px;
-}
-
-nav div a:hover{
-  color:#60a5fa;
-}
-
-/* HERO */
-.hero{
-  text-align:center;
-  padding:90px 20px;
-  background:linear-gradient(#1e3a8a,#020617);
-}
-
-.hero h1{
-  font-size:42px;
-  line-height:1.2;
-}
-
-.hero p{
-  color:#cbd5f5;
-  margin-top:10px;
-}
-
-.btn{
-  background:#1d4ed8 ;
-  color:white;
-  padding:12px 25px;
-  border:none;
-  border-radius:80px;
-  cursor:pointer;
-  margin-top:20px;
-  transition:0.3s;
-}
-
-.btn:hover{
-  transform:scale(1.05);
-  background: #c35499e0;
-}
-
-/* SECTION */
-.section{
-  max-width:1100px;
-  margin:auto;
-  padding:60px 20px;
-  text-align:center;
-}
-
-/* STATS */
-.stats{
-  display:flex;
-  justify-content:center;
-  gap:40px;
-  font-size:20px;
-  flex-wrap:wrap;
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  margin-top:25px;
-}
-
-/* CARD */
-.card{
-  background:#111827;
-  padding:20px;
-  border-radius:10px;
-  border:1px solid #1f2937;
-  transition:0.3s;
-  display:block;
-  color:white;
-  text-decoration:none;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-  border-color:#2563eb;
-}
-
-/* PRICE */
-.price{
-  font-size:28px;
-  color:#60a5fa;
-  margin:10px 0;
-}
-
-.highlight{
-  border:2px solid #2563eb;
-}
-
-/* FORM */
-.row{
-  display:flex;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-input,textarea{
-  width:100%;
-  padding:10px;
-  border:none;
-  border-radius:6px;
-  background:#0f172a;
-  color:white;
-}
-
-.success{
-  display:none;
-  margin-top:10px;
-  font-weight:500;
-  transition:0.4s;
-  opacity:0;
-  transform:translateY(-10px);
-}
-
-/* WHATSAPP */
-.whatsapp{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  background:#25D366;
-  padding:12px 16px;
-  border-radius:50px;
-  color:white;
-  text-decoration:none;
-  z-index:999;
-}
-
-/* CHATBOT */
-#chatbox{
-  position:fixed;
-  right:20px;
-  bottom:80px;
-  width:260px;
-  max-width:90vw;
-  z-index:999;
-}
-
-#chat-header{
-  background:#25D366;
-  padding:10px;
-  cursor:pointer;
-  border-radius:6px;
-}
-
-#chat-body{
-  display:none;
-  background:#111827;
-  padding:10px;
-  border-radius:10px;
-}
-
-#messages{
-  height:120px;
-  overflow:auto;
-  font-size:12px;
-  margin-bottom:5px;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:768px){
-
-  .hero h1{
-    font-size:28px;
-  }
-
-
-
-  .row{
-    flex-direction:column;
-  }
-
-  .stats{
-    flex-direction:column;
-    gap:20px;
-  }
-
-  .logo img{
-    width:50px;
-  }
-}
-
-@media(max-width:480px){
-
-  .hero{
-    padding:60px 15px;
-  }
-
-  .hero h1{
-    font-size:22px;
-  }
-
-  .hero p{
-    font-size:14px;
-  }
-
-  nav div a{
-    display:inline-block;
-    margin:5px 8px;
-  }
-
-  #chatbox{
-    width:150px;
-    right:10px;
-  }
-
-  .whatsapp{
-    right:10px;
-    bottom:10px;
-  }
-}
-
-.carousel{
-  position:relative;
-  overflow:hidden;
-  max-width:1100px;
-  margin:auto;
-}
-
-.carousel-track{
-  display:flex;
-  transition:transform 0.5s ease;
-}
-
-.t-card{
-  flex:0 0 33.33%;
-  padding:20px;
-  margin:10px;
-  background:#111827;
-  border-radius:15px;
-  opacity:0.5;
-  transform:scale(0.85);
-  transition:0.4s;
-  text-align:center;
-}
-
-.t-card.active{
-  opacity:1;
-  transform:scale(1.05);
-  background:#1f2937;
-}
-
-.stars{
-  color:#facc15;
-  margin-bottom:10px;
-}
-
-.quote{
-  font-size:14px;
-  margin-bottom:10px;
-}
-
-/* arrows */
-.nav{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:#2563eb;
-  border:none;
-  color:white;
-  padding:10px;
-  cursor:pointer;
-  border-radius:50%;
-}
-
-.prev{ left:10px; }
-.next{ right:10px; }
-
-/* responsive */
-@media(max-width:1024px){
-  .t-card{ flex:0 0 50%; }
-}
-
-@media(max-width:768px){
-  .t-card{ flex:0 0 100%; }
-  .nav{ display:none; }
-}
-
-/* FAQ BOX */
-.faq-box{
-  max-width:800px;
-  margin:auto;
-  text-align:left;
-}
-
-.faq-item{
-  background:#111827;
-  margin-bottom:10px;
-  padding:15px;
-  border-radius:10px;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.faq-item:hover{
-  background:#1f2937;
-}
-
-.faq-question{
-  font-weight:600;
-}
-
-.faq-answer{
-  display:none;
-  color:#9ca3af;
-  margin-top:8px;
-}
-
-/* CTA */
-.cta{
-  padding:80px 20px;
-}
-
-.cta-box{
-  max-width:900px;
-  margin:auto;
-  background:linear-gradient(135deg,#2563eb,#9333ea);
-  padding:40px;
-  border-radius:20px;
-  text-align:center;
-  box-shadow:0 10px 40px rgba(0,0,0,0.4);
-  animation:fadeUp 1s ease;
-}
-
-.cta-box h2{
-  font-size:28px;
-}
-
-.cta-box p{
-  margin:10px 0;
-  color:#e5e7eb;
-}
-
-/* FOOTER */
-.footer{
-  background:#050816;
-  padding:50px 20px;
-}
-
-.footer-grid{
-  max-width:1100px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:30px;
-}
-
-.footer a{
-  display:block;
-  color:#9ca3af;
-  text-decoration:none;
-  margin:5px 0;
-}
-
-.footer a:hover{
-  color:#60a5fa;
-}
-
-.footer-bottom{
-  text-align:center;
-  margin-top:30px;
-  color:#6b7280;
-}
-
-/* ANIMATION */
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s;
-}
-
-.fade.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(30px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .footer-grid{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
-
-  .cta-box h2{
-    font-size:22px;
-  }
-}
-/* ===== IMPROVED SECTION SPACING ===== */
-.section{
-  max-width:1100px;
-  margin:auto;
-  padding:90px 20px 70px;
-  text-align:center;
-}
-
-/* ===== HEADINGS (VERY IMPORTANT) ===== */
-.section h2{
-  font-size:34px;
-  margin-bottom:25px;
-  position:relative;
-  display:inline-block;
-  font-weight:600;
-}
-
-/* underline animation */
-.section h2::after{
-  content:"";
-  width:50%;
-  height:3px;
-  background:linear-gradient(90deg,#2563eb,#60a5fa);
-  position:absolute;
-  left:25%;
-  bottom:-10px;
-  border-radius:10px;
-}
-
-/* ===== ABOUT TEXT FIX ===== */
-#about p{
-  max-width:750px;
-  margin:20px auto 0;
-  line-height:1.7;
-  color:#cbd5f5;
-  font-size:15px;
-}
-
-/* ===== SERVICES FIX ===== */
-#services{
-  margin-top:30px;
-}
-
-#services .grid{
-  margin-top:40px;
-}
-
-/* ===== CARD IMPROVEMENT ===== */
-.card{
-  background:#111827;
-  padding:25px 20px;
-  border-radius:12px;
-  border:1px solid #1f2937;
-  transition:0.3s;
-  text-align:center;
-}
-
-.card:hover{
-  transform:translateY(-10px);
-  border-color:#2563eb;
-  box-shadow:0 10px 30px rgba(37,99,235,0.2);
-}
-
-.card h3{
-  font-size:18px;
-  margin-bottom:10px;
-}
-
-.card p{
-  color:#9ca3af;
-  font-size:14px;
-}
-
-/* ===== ADD SPACE BETWEEN SECTIONS ===== */
-#about{
-  margin-bottom:20px;
-}
-
-#services{
-  margin-top:20px;
-}
-
-/* ===== MOBILE NAV FIX ===== */
-
-.navbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-/* desktop menu */
-.desktop-menu a{
-  margin-left:20px;
-}
-
-/* hamburger */
-.menu-toggle{
-  display:none;
-  font-size:24px;
-  cursor:pointer;
-}
-
-/* sidebar */
-.mobile-menu{
-  position:fixed;
-  top:0;
-  right:-220px;
-  width:120px;
-  height:100%;
-  background:#111827;
-  padding-top:60px;
-  transition:0.3s ease;
-  z-index:9999;
-  display:flex;
-  flex-direction:column;
-}
-
-.mobile-menu a{
-  padding:12px 20px;
-  color:#cbd5f5;
-  text-decoration:none;
-}
-
-.mobile-menu a:hover{
-  color:#60a5fa;
-}
-
-/* close button */
-.close-btn{
-  position:absolute;
-  top:10px;
-  right:15px;
-  font-size:26px;
-  cursor:pointer;
-}
-
-/* MOBILE ONLY */
-@media(max-width:768px){
-
-  .desktop-menu{
-  display:flex;
-}
-
-@media(max-width:768px){
-  .desktop-menu{
-    display:none;
-  }
-
-  .menu-toggle{
-    display:block;
-  }
-}
-  /* show hamburger */
-  .menu-toggle{
-    display:block;
-  }
-}
-
-.loader {
-  border: 2px solid #fff;
-  border-top: 2px solid transparent;
-  border-radius: 50%;
-  width: 14px;
-  height: 14px;
-  display: inline-block;
-  animation: spin 0.6s linear infinite;
-  margin-right: 6px;
-  vertical-align: middle;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-.footer-contact{
-  text-align:center;
-}
-
-/* phone spacing */
-.footer-contact .phone{
-  margin:10px 0 15px;
-  color:#cbd5f5;
-  font-size:15px;
-}
-
-/* SOCIAL ICONS */
-.footer-social{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
-}
-
-/* ICON STYLE */
-.footer-social a{
-  width:48px;
-  height:48px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  font-size:20px;
-  color:#fff;
-  transition:0.3s;
-}
-
-/* COLORS */
-.footer-social a:nth-child(1){ background:#E1306C; }
-.footer-social a:nth-child(2){ background:#25D366; }
-.footer-social a:nth-child(3){ background:#0077B5; }
-
-/* HOVER */
-.footer-social a:hover{
-  transform:scale(1.1);
-}
-
-/* MOBILE FIX */
-@media(max-width:768px){
-  .footer-contact{
-    margin-top:20px;
-  }
-
-  .footer-social a{
-    width:42px;
-    height:42px;
-    font-size:18px;
-  }
-}
-
-@media(max-width:480px){
-  .footer-social a{
-    width:38px;
-    height:38px;
-    font-size:16px;
-  }
-}
-
-/* ===== PRO STATS UI ===== */
-
-.stats-pro{
-  text-align:center;
-}
-
-.stats-pro h2{
-  margin-bottom:40px;
-}
-
-/* GRID */
-.stats-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:30px;
-}
-
-/* CARD */
-.stat-card{
-  background:#111827;
-  padding:30px 20px;
-  border-radius:15px;
-  border:1px solid #1f2937;
-  transition:0.3s;
-}
-
-.stat-card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 10px 30px rgba(37,99,235,0.3);
-  border-color:#2563eb;
-}
-
-/* CIRCLE GRAPH */
-.circle{
-  width:90px;
-  height:90px;
-  margin:auto;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  font-weight:600;
-  color:#60a5fa;
-  background:conic-gradient(#2563eb 0%, #1f2937 0%);
-  transition:1s;
-}
-
-/* TEXT */
-.stat-card p{
-  margin-top:15px;
-  color:#9ca3af;
-  font-size:14px;
-}
-/* ===== POPUP MODAL ===== */
-
-.popup{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.7);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-
-.popup-content{
-  width:90%;
-  max-width:700px;
-  height:80%;
-  background:#111827;
-  border-radius:15px;
-  overflow:hidden;
-  position:relative;
-  animation:popupFade 0.3s ease;
-}
-
-.popup-content iframe{
-  width:100%;
-  height:100%;
-  border:none;
-}
-
-.close-popup{
-  position:absolute;
-  top:10px;
-  right:15px;
-  font-size:22px;
-  cursor:pointer;
-  color:white;
-}
-
-@keyframes popupFade{
-  from{
-    transform:scale(0.8);
-    opacity:0;
-  }
-  to{
-    transform:scale(1);
-    opacity:1;
-  }
-}
-/* ===== ONE SECTION SERVICES (PRO) ===== */
-
-.services-wrapper{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:40px;
-  margin-top:40px;
-  flex-wrap:wrap;
-}
-
-/* LEFT TEXT */
-.services-text{
-  flex:1;
-  min-width:280px;
-  text-align:left;
-}
-
-.services-text h3{
-  font-size:24px;
-  margin-bottom:15px;
-}
-
-.services-text p{
-  color:#9ca3af;
-  margin-bottom:20px;
-  line-height:1.6;
-}
-
-/* RIGHT GRID */
-.services-cards{
-  flex:1;
-  min-width:280px;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-}
-
-/* SMALL BOX */
-.service-box{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  background:#111827;
-  padding:25px;
-  border-radius:12px;
-  border:1px solid #1f2937;
-  text-decoration:none;
-  color:#fff;
-  transition:0.3s;
-}
-
-/* ICON */
-.service-box i{
-  font-size:22px;
-  margin-bottom:8px;
-  color:#60a5fa;
-}
-
-/* TEXT */
-.service-box span{
-  font-size:14px;
-}
-
-/* HOVER */
-.service-box:hover{
-  transform:translateY(-8px);
-  border-color:#2563eb;
-  box-shadow:0 10px 30px rgba(37,99,235,0.3);
-}
-
-/* MOBILE */
-@media(max-width:768px){
-
-  .services-wrapper{
-    flex-direction:column;
-    text-align:center;
-  }
-
-  .services-text{
-    text-align:center;
-  }
-
-  .services-cards{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(max-width:480px){
-  .services-cards{
-    grid-template-columns:1fr;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<nav class="navbar">
-  <div class="logo">
-    <img src="codespherelogo.jpeg" alt="Codesphere Logo">
-  </div>
-
-  <!-- hamburger -->
-  <div class="menu-toggle" onclick="openNav()">☰</div>
-
-  <!-- desktop menu -->
-  <div class="desktop-menu">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-
-<!-- MOBILE SIDEBAR -->
-<div id="mobileMenu" class="mobile-menu">
-  <span class="close-btn" onclick="closeNav()">✕</span>
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#pricing">Pricing</a>
-  <a href="#contact">Contact</a>
-</div>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-<h1>We Build High-Converting Websites</h1>
-<p>Modern web solutions for businesses & startups</p>
-<button class="btn" onclick="openPopup()">Start Your Project</button>
-</section>
-
-<!-- STATS -->
-<section class="section stats-pro">
-
-  <h2>Our Achievements</h2>
-
-  <div class="stats-grid">
-
-    <div class="stat-card">
-      <div class="circle">
-        <span id="c1">0</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Codesphere</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Poppins;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: #0b0f1a;
+        color: #fff;
+      }
+
+      /* HEADER */
+      header {
+        background: #050816;
+        padding: 10px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid #1f2937;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: auto;
+        padding: 0 15px;
+      }
+
+      .logo img {
+        width: 100px;
+        height: auto;
+      }
+
+      /* NAV LINKS */
+      nav div a {
+        color: #cbd5f5;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 16px;
+      }
+
+      nav div a:hover {
+        color: #60a5fa;
+      }
+
+      /* HERO */
+      .hero {
+        text-align: center;
+        padding: 90px 20px;
+        background: linear-gradient(#1e3a8a, #020617);
+      }
+
+      .hero h1 {
+        font-size: 42px;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        color: #cbd5f5;
+        margin-top: 10px;
+      }
+
+      .btn {
+        background: #1d4ed8;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 80px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        transform: scale(1.05);
+        background: #c35499e0;
+      }
+
+      /* SECTION */
+      .section {
+        max-width: 1100px;
+        margin: auto;
+        padding: 60px 20px;
+        text-align: center;
+      }
+
+      /* STATS */
+      .stats {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        font-size: 20px;
+        flex-wrap: wrap;
+      }
+
+      /* GRID */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        margin-top: 25px;
+      }
+
+      /* CARD */
+      .card {
+        background: #111827;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #1f2937;
+        transition: 0.3s;
+        display: block;
+        color: white;
+        text-decoration: none;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        border-color: #2563eb;
+      }
+
+      /* PRICE */
+      .price {
+        font-size: 28px;
+        color: #60a5fa;
+        margin: 10px 0;
+      }
+
+      .highlight {
+        border: 2px solid #2563eb;
+      }
+
+      /* FORM */
+      .row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        background: #0f172a;
+        color: white;
+      }
+
+      .success {
+        display: none;
+        margin-top: 10px;
+        font-weight: 500;
+        transition: 0.4s;
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      /* WHATSAPP */
+      .whatsapp {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        background: #25d366;
+        padding: 12px 16px;
+        border-radius: 50px;
+        color: white;
+        text-decoration: none;
+        z-index: 999;
+      }
+
+      /* CHATBOT */
+      #chatbox {
+        position: fixed;
+        right: 20px;
+        bottom: 80px;
+        width: 260px;
+        max-width: 90vw;
+        z-index: 999;
+      }
+
+      #chat-header {
+        background: #25d366;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 6px;
+      }
+
+      #chat-body {
+        display: none;
+        background: #111827;
+        padding: 10px;
+        border-radius: 10px;
+      }
+
+      #messages {
+        height: 120px;
+        overflow: auto;
+        font-size: 12px;
+        margin-bottom: 5px;
+      }
+
+      /* ================= MOBILE ================= */
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 28px;
+        }
+
+        .row {
+          flex-direction: column;
+        }
+
+        .stats {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .logo img {
+          width: 50px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero {
+          padding: 60px 15px;
+        }
+
+        .hero h1 {
+          font-size: 22px;
+        }
+
+        .hero p {
+          font-size: 14px;
+        }
+
+        nav div a {
+          display: inline-block;
+          margin: 5px 8px;
+        }
+
+        #chatbox {
+          width: 150px;
+          right: 10px;
+        }
+
+        .whatsapp {
+          right: 10px;
+          bottom: 10px;
+        }
+      }
+
+      .carousel {
+        position: relative;
+        overflow: hidden;
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+
+      .t-card {
+        flex: 0 0 33.33%;
+        padding: 20px;
+        margin: 10px;
+        background: #111827;
+        border-radius: 15px;
+        opacity: 0.5;
+        transform: scale(0.85);
+        transition: 0.4s;
+        text-align: center;
+      }
+
+      .t-card.active {
+        opacity: 1;
+        transform: scale(1.05);
+        background: #1f2937;
+      }
+
+      .stars {
+        color: #facc15;
+        margin-bottom: 10px;
+      }
+
+      .quote {
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      /* arrows */
+      .nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #2563eb;
+        border: none;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+      }
+
+      .prev {
+        left: 10px;
+      }
+      .next {
+        right: 10px;
+      }
+
+      /* responsive */
+      @media (max-width: 1024px) {
+        .t-card {
+          flex: 0 0 50%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .t-card {
+          flex: 0 0 100%;
+        }
+        .nav {
+          display: none;
+        }
+      }
+
+      /* FAQ BOX */
+      .faq-box {
+        max-width: 800px;
+        margin: auto;
+        text-align: left;
+      }
+
+      .faq-item {
+        background: #111827;
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .faq-item:hover {
+        background: #1f2937;
+      }
+
+      .faq-question {
+        font-weight: 600;
+      }
+
+      .faq-answer {
+        display: none;
+        color: #9ca3af;
+        margin-top: 8px;
+      }
+
+      /* CTA */
+      .cta {
+        padding: 80px 20px;
+      }
+
+      .cta-box {
+        max-width: 900px;
+        margin: auto;
+        background: linear-gradient(135deg, #2563eb, #9333ea);
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        animation: fadeUp 1s ease;
+      }
+
+      .cta-box h2 {
+        font-size: 28px;
+      }
+
+      .cta-box p {
+        margin: 10px 0;
+        color: #e5e7eb;
+      }
+
+      /* FOOTER */
+      .footer {
+        background: #050816;
+        padding: 50px 20px;
+      }
+
+      .footer-grid {
+        max-width: 1100px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .footer a {
+        display: block;
+        color: #9ca3af;
+        text-decoration: none;
+        margin: 5px 0;
+      }
+
+      .footer a:hover {
+        color: #60a5fa;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        margin-top: 30px;
+        color: #6b7280;
+      }
+
+      /* ANIMATION */
+      .fade {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: 1s;
+      }
+
+      .fade.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .footer-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .cta-box h2 {
+          font-size: 22px;
+        }
+      }
+      /* ===== IMPROVED SECTION SPACING ===== */
+      .section {
+        max-width: 1100px;
+        margin: auto;
+        padding: 90px 20px 70px;
+        text-align: center;
+      }
+
+      /* ===== HEADINGS (VERY IMPORTANT) ===== */
+      .section h2 {
+        font-size: 34px;
+        margin-bottom: 25px;
+        position: relative;
+        display: inline-block;
+        font-weight: 600;
+      }
+
+      /* underline animation */
+      .section h2::after {
+        content: "";
+        width: 50%;
+        height: 3px;
+        background: linear-gradient(90deg, #2563eb, #60a5fa);
+        position: absolute;
+        left: 25%;
+        bottom: -10px;
+        border-radius: 10px;
+      }
+
+      /* ===== ABOUT TEXT FIX ===== */
+      #about p {
+        max-width: 750px;
+        margin: 20px auto 0;
+        line-height: 1.7;
+        color: #cbd5f5;
+        font-size: 15px;
+      }
+
+      /* ===== SERVICES FIX ===== */
+      #services {
+        margin-top: 30px;
+      }
+
+      #services .grid {
+        margin-top: 40px;
+      }
+
+      /* ===== CARD IMPROVEMENT ===== */
+      .card {
+        background: #111827;
+        padding: 25px 20px;
+        border-radius: 12px;
+        border: 1px solid #1f2937;
+        transition: 0.3s;
+        text-align: center;
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        border-color: #2563eb;
+        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+      }
+
+      .card h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .card p {
+        color: #9ca3af;
+        font-size: 14px;
+      }
+
+      /* ===== ADD SPACE BETWEEN SECTIONS ===== */
+      #about {
+        margin-bottom: 20px;
+      }
+
+      #services {
+        margin-top: 20px;
+      }
+
+      /* ===== MOBILE NAV FIX ===== */
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* desktop menu */
+      .desktop-menu a {
+        margin-left: 20px;
+      }
+
+      /* hamburger */
+      .menu-toggle {
+        display: none;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      /* sidebar */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -220px;
+        width: 120px;
+        height: 100%;
+        background: #111827;
+        padding-top: 60px;
+        transition: 0.3s ease;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .mobile-menu a {
+        padding: 12px 20px;
+        color: #cbd5f5;
+        text-decoration: none;
+      }
+
+      .mobile-menu a:hover {
+        color: #60a5fa;
+      }
+
+      /* close button */
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 26px;
+        cursor: pointer;
+      }
+
+      /* MOBILE ONLY */
+      @media (max-width: 768px) {
+        .desktop-menu {
+          display: flex;
+        }
+
+        @media (max-width: 768px) {
+          .desktop-menu {
+            display: none;
+          }
+
+          .menu-toggle {
+            display: block;
+          }
+        }
+        /* show hamburger */
+        .menu-toggle {
+          display: block;
+        }
+      }
+
+      .loader {
+        border: 2px solid #fff;
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        display: inline-block;
+        animation: spin 0.6s linear infinite;
+        margin-right: 6px;
+        vertical-align: middle;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .footer-contact {
+        text-align: center;
+      }
+
+      /* phone spacing */
+      .footer-contact .phone {
+        margin: 10px 0 15px;
+        color: #cbd5f5;
+        font-size: 15px;
+      }
+
+      /* SOCIAL ICONS */
+      .footer-social {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      /* ICON STYLE */
+      .footer-social a {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 20px;
+        color: #fff;
+        transition: 0.3s;
+      }
+
+      /* COLORS */
+      .footer-social a:nth-child(1) {
+        background: #e1306c;
+      }
+      .footer-social a:nth-child(2) {
+        background: #25d366;
+      }
+      .footer-social a:nth-child(3) {
+        background: #0077b5;
+      }
+
+      /* HOVER */
+      .footer-social a:hover {
+        transform: scale(1.1);
+      }
+
+      /* MOBILE FIX */
+      @media (max-width: 768px) {
+        .footer-contact {
+          margin-top: 20px;
+        }
+
+        .footer-social a {
+          width: 42px;
+          height: 42px;
+          font-size: 18px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .footer-social a {
+          width: 38px;
+          height: 38px;
+          font-size: 16px;
+        }
+      }
+
+      /* ===== PRO STATS UI ===== */
+
+      .stats-pro {
+        text-align: center;
+      }
+
+      .stats-pro h2 {
+        margin-bottom: 40px;
+      }
+
+      /* GRID */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 30px;
+      }
+
+      /* CARD */
+      .stat-card {
+        background: #111827;
+        padding: 30px 20px;
+        border-radius: 15px;
+        border: 1px solid #1f2937;
+        transition: 0.3s;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        border-color: #2563eb;
+      }
+
+      /* CIRCLE GRAPH */
+      .circle {
+        width: 90px;
+        height: 90px;
+        margin: auto;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: 600;
+        color: #60a5fa;
+        background: conic-gradient(#2563eb 0%, #1f2937 0%);
+        transition: 1s;
+      }
+
+      /* TEXT */
+      .stat-card p {
+        margin-top: 15px;
+        color: #9ca3af;
+        font-size: 14px;
+      }
+      /* ===== POPUP MODAL ===== */
+
+      .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      .popup-content {
+        width: 90%;
+        max-width: 700px;
+        height: 80%;
+        background: #111827;
+        border-radius: 15px;
+        overflow: hidden;
+        position: relative;
+        animation: popupFade 0.3s ease;
+      }
+
+      .popup-content iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .close-popup {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 22px;
+        cursor: pointer;
+        color: white;
+      }
+
+      @keyframes popupFade {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      /* ===== ONE SECTION SERVICES (PRO) ===== */
+
+      .services-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+      }
+
+      /* LEFT TEXT */
+      .services-text {
+        flex: 1;
+        min-width: 280px;
+        text-align: left;
+      }
+
+      .services-text h3 {
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+
+      .services-text p {
+        color: #9ca3af;
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+
+      /* RIGHT GRID */
+      .services-cards {
+        flex: 1;
+        min-width: 280px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      /* SMALL BOX */
+      .service-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #111827;
+        padding: 25px;
+        border-radius: 12px;
+        border: 1px solid #1f2937;
+        text-decoration: none;
+        color: #fff;
+        transition: 0.3s;
+      }
+
+      /* ICON */
+      .service-box i {
+        font-size: 22px;
+        margin-bottom: 8px;
+        color: #60a5fa;
+      }
+
+      /* TEXT */
+      .service-box span {
+        font-size: 14px;
+      }
+
+      /* HOVER */
+      .service-box:hover {
+        transform: translateY(-8px);
+        border-color: #2563eb;
+        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+      }
+
+      /* MOBILE */
+      @media (max-width: 768px) {
+        .services-wrapper {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .services-text {
+          text-align: center;
+        }
+
+        .services-cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .services-cards {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="codespherelogo.jpeg" alt="Codesphere Logo" />
+        </div>
+
+        <!-- hamburger -->
+        <div class="menu-toggle" onclick="openNav()">☰</div>
+
+        <!-- desktop menu -->
+        <div class="desktop-menu">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+
+      <!-- MOBILE SIDEBAR -->
+      <div id="mobileMenu" class="mobile-menu">
+        <span class="close-btn" onclick="closeNav()">✕</span>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
       </div>
-      <p>Projects Completed</p>
-    </div>
+    </header>
 
-    <div class="stat-card">
-      <div class="circle">
-        <span id="c2">0</span>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>We Build High-Converting Websites</h1>
+      <p>Modern web solutions for businesses & startups</p>
+      <button class="btn" onclick="openPopup()">Start Your Project</button>
+    </section>
+
+    <!-- STATS -->
+    <section class="section stats-pro">
+      <h2>Our Achievements</h2>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="circle">
+            <span id="c1">0</span>
+          </div>
+          <p>Projects Completed</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="circle">
+            <span id="c2">0</span>
+          </div>
+          <p>Happy Clients</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="circle">
+            <span id="c3">0</span>
+          </div>
+          <p>Countries Served</p>
+        </div>
       </div>
-      <p>Happy Clients</p>
-    </div>
+    </section>
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <h2>About Us</h2>
+      <p>
+        Codesphere Agency is a professional website development company
+        providing high-quality websites, ecommerce solutions, and custom web
+        applications for businesses worldwide.
+      </p>
+    </section>
 
-    <div class="stat-card">
-      <div class="circle">
-        <span id="c3">0</span>
+    <section class="section services-pro" id="services">
+      <h2>Our Services</h2>
+
+      <div class="services-wrapper">
+        <!-- LEFT SIDE (TEXT) -->
+        <div class="services-text fade">
+          <h3>Complete Digital Solutions</h3>
+          <p>
+            We provide end-to-end web solutions including design, development,
+            ecommerce and SEO to help your business grow online.
+          </p>
+
+          <button class="btn" onclick="scrollToContact()">
+            Start Your Project
+          </button>
+        </div>
+
+        <!-- RIGHT SIDE (CARDS GRID) -->
+        <div class="services-cards fade">
+          <a href="uiux.html" class="service-box">
+            <i class="fa-solid fa-pen-ruler"></i>
+            <span>UI/UX Design</span>
+          </a>
+
+          <a href="webdev.html" class="service-box">
+            <i class="fa-solid fa-code"></i>
+            <span>Web Development</span>
+          </a>
+
+          <a href="ecommerce.html" class="service-box">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Ecommerce</span>
+          </a>
+
+          <a href="seo.html" class="service-box">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>SEO</span>
+          </a>
+        </div>
       </div>
-      <p>Countries Served</p>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section" id="pricing">
+      <h2>Pricing Plans</h2>
+
+      <div class="grid">
+        <!-- STARTER -->
+        <div class="card">
+          <h3>Starter</h3>
+          <div class="price">₹20,000</div>
+
+          <p>✔ 1-3 Pages Website</p>
+          <p>✔ Mobile Responsive</p>
+          <p>✔ Contact Form</p>
+          <br />
+
+          <a href="starter.html" class="btn">More Details</a>
+        </div>
+
+        <!-- BUSINESS -->
+        <div class="card highlight">
+          <h3>Business</h3>
+          <div class="price">₹30,000</div>
+
+          <p>✔ 5-8 Pages Website</p>
+          <p>✔ Premium UI Design</p>
+          <p>✔ SEO Optimization</p>
+          <br />
+
+          <a href="business.html" class="btn">More Details</a>
+        </div>
+
+        <!-- PREMIUM -->
+        <div class="card">
+          <h3>Premium</h3>
+          <div class="price">₹50,000</div>
+
+          <p>✔ Full Website</p>
+          <p>✔ Ecommerce System</p>
+          <p>✔ Payment Integration</p>
+          <br />
+
+          <a href="premium.html" class="btn">More Details</a>
+        </div>
+      </div>
+    </section>
+    <!-- CLIENT SUCCESS STORIES -->
+    <section class="testimonials" id="testimonials">
+      <div class="section">
+        <h2 class="section-title">Client Success Stories</h2>
+        <p class="section-subtitle">
+          Real results from businesses who trusted Codesphere.
+        </p>
+
+        <div class="carousel">
+          <button class="nav prev">&#10094;</button>
+
+          <div class="carousel-track">
+            <!-- 12 CLIENTS -->
+            <div class="t-card active">
+              <div class="stars">★★★★★</div>
+              <p class="quote">Amazing website & fast delivery.</p>
+              <h4>Rahul Mehta</h4>
+            </div>
+
+            <div class="t-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">Perfect ecommerce solution.</p>
+              <h4>Priya Sharma</h4>
+            </div>
+
+            <div class="t-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">SEO improved a lot.</p>
+              <h4>Amit Joshi</h4>
+            </div>
+
+            <div class="t-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">Professional team.</p>
+              <h4>Neha Patil</h4>
+            </div>
+
+            <div class="t-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">Highly recommended.</p>
+              <h4>Rohan Deshmukh</h4>
+            </div>
+
+            <div class="t-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">Great UI design.</p>
+              <h4>Simran Kaur</h4>
+            </div>
+
+            <div class="t-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">Fast & reliable.</p>
+              <h4>Vikram Singh</h4>
+            </div>
+
+            <div class="t-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">Loved the design.</p>
+              <h4>Anjali Verma</h4>
+            </div>
+
+            <div class="t-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">Top agency work.</p>
+              <h4>Karan Shah</h4>
+            </div>
+
+            <div class="t-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">Perfect mobile UI.</p>
+              <h4>Pooja Nair</h4>
+            </div>
+
+            <div class="t-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">Great support.</p>
+              <h4>Arjun Gupta</h4>
+            </div>
+
+            <div class="t-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">Loved everything!</p>
+              <h4>Sneha Kulkarni</h4>
+            </div>
+          </div>
+
+          <button class="nav next">&#10095;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <h2>Contact Us</h2>
+
+      <form id="form">
+        <div class="row">
+          <input name="fname" placeholder="First Name" required />
+          <input name="lname" placeholder="Last Name" required />
+        </div>
+
+        <div class="row">
+          <input name="email" placeholder="Email" required />
+          <input name="phone" placeholder="Phone" />
+        </div>
+
+        <textarea name="message" placeholder="Message" required></textarea>
+
+        <button type="submit" class="btn" id="submitBtn">Send Message</button>
+        <div class="success" id="msg">Message Sent Successfully</div>
+      </form>
+    </section>
+
+    <!-- WHATSAPP -->
+    <a class="whatsapp" href="https://wa.me/917028079359">WhatsApp</a>
+
+    <!-- CHATBOT -->
+    <div id="chatbox">
+      <div id="chat-header" onclick="toggleChat()">AI Chat</div>
+      <div id="chat-body">
+        <div id="messages"></div>
+        <input
+          id="chatInput"
+          onkeypress="sendMsg(event)"
+          placeholder="Ask..."
+        />
+      </div>
     </div>
 
-  </div>
+    <!-- FAQ -->
+    <section class="section fade">
+      <h2 class="section-title">Frequently Asked Questions</h2>
 
-</section>
-<!-- ABOUT -->
-<section class="section" id="about">
-<h2>About Us</h2>
-<p>Codesphere Agency is a professional website development company providing high-quality websites, ecommerce solutions, and custom web applications for businesses worldwide.</p>
-</section>
-
-<section class="section services-pro" id="services">
-
-<h2>Our Services</h2>
-
-<div class="services-wrapper">
-
-  <!-- LEFT SIDE (TEXT) -->
-  <div class="services-text fade">
-    <h3>Complete Digital Solutions</h3>
-    <p>
-      We provide end-to-end web solutions including design, development,
-      ecommerce and SEO to help your business grow online.
-    </p>
-
-    <button class="btn" onclick="scrollToContact()">Start Your Project</button>
-  </div>
-
-  <!-- RIGHT SIDE (CARDS GRID) -->
-  <div class="services-cards fade">
-
-    <a href="uiux.html" class="service-box">
-      <i class="fa-solid fa-pen-ruler"></i>
-      <span>UI/UX Design</span>
-    </a>
-
-    <a href="webdev.html" class="service-box">
-      <i class="fa-solid fa-code"></i>
-      <span>Web Development</span>
-    </a>
-
-    <a href="ecommerce.html" class="service-box">
-      <i class="fa-solid fa-cart-shopping"></i>
-      <span>Ecommerce</span>
-    </a>
-
-    <a href="seo.html" class="service-box">
-      <i class="fa-solid fa-chart-line"></i>
-      <span>SEO</span>
-    </a>
-
-  </div>
-
-</div>
-
-</section>
-
-<!-- PRICING -->
-<section class="section" id="pricing">
-<h2>Pricing Plans</h2>
-
-<div class="grid">
-
-  <!-- STARTER -->
-  <div class="card">
-    <h3>Starter</h3>
-    <div class="price">₹20,000</div>
-
-    <p>✔ 1-3 Pages Website</p>
-    <p>✔ Mobile Responsive</p>
-    <p>✔ Contact Form</p>
-<br>
-
-    <a href="starter.html" class="btn">More Details</a>
-  </div>
-
-  <!-- BUSINESS -->
-  <div class="card highlight">
-    <h3>Business</h3>
-    <div class="price">₹30,000</div>
-
-    <p>✔ 5-8 Pages Website</p>
-    <p>✔ Premium UI Design</p>
-    <p>✔ SEO Optimization</p>
-   <br>
-
-    <a href="business.html" class="btn">More Details</a>
-  </div>
-
-  <!-- PREMIUM -->
-  <div class="card">
-    <h3>Premium</h3>
-    <div class="price">₹50,000</div>
-
-    <p>✔ Full Website</p>
-    <p>✔ Ecommerce System</p>
-    <p>✔ Payment Integration</p>
-  <br>
-
-    <a href="premium.html" class="btn">More Details</a>
-  </div>
-
-</div>
-</section>
-<!-- CLIENT SUCCESS STORIES -->
-<section class="testimonials" id="testimonials">
-
-  <div class="section">
-
-    <h2 class="section-title">Client Success Stories</h2>
-    <p class="section-subtitle">
-      Real results from businesses who trusted Codesphere.
-    </p>
-
-    <div class="carousel">
-
-      <button class="nav prev">&#10094;</button>
-
-      <div class="carousel-track">
-
-        <!-- 12 CLIENTS -->
-        <div class="t-card active">
-          <div class="stars">★★★★★</div>
-          <p class="quote">Amazing website & fast delivery.</p>
-          <h4>Rahul Mehta</h4>
+      <div class="faq-box">
+        <div class="faq-item">
+          <div class="faq-question">How long does a website take?</div>
+          <div class="faq-answer">
+            Usually 5–10 days depending on project complexity.
+          </div>
         </div>
 
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">Perfect ecommerce solution.</p>
-          <h4>Priya Sharma</h4>
+        <div class="faq-item">
+          <div class="faq-question">Do you provide hosting?</div>
+          <div class="faq-answer">
+            Yes, we help with domain, hosting & deployment.
+          </div>
         </div>
 
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">SEO improved a lot.</p>
-          <h4>Amit Joshi</h4>
+        <div class="faq-item">
+          <div class="faq-question">Is it mobile responsive?</div>
+          <div class="faq-answer">
+            100% responsive across mobile, tablet & desktop.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta fade">
+      <div class="cta-box">
+        <h2>Let’s Build Something Amazing 🚀</h2>
+        <p>Start your project today and grow your business online.</p>
+        <button class="btn" onclick="scrollToContact()">Start Project</button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-grid">
+        <div>
+          <h3>CodesphereAgency</h3>
+          <p>
+            We create modern, high-converting websites for businesses worldwide.
+          </p>
         </div>
 
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">Professional team.</p>
-          <h4>Neha Patil</h4>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
         </div>
 
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">Highly recommended.</p>
-          <h4>Rohan Deshmukh</h4>
-        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p class="phone">+91 7028079359</p>
 
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">Great UI design.</p>
-          <h4>Simran Kaur</h4>
-        </div>
+          <div class="footer-social">
+            <a href="https://instagram.com/codesphereagency" target="_blank">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
 
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">Fast & reliable.</p>
-          <h4>Vikram Singh</h4>
-        </div>
+            <a href="https://wa.me/917028079359" target="_blank">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
 
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">Loved the design.</p>
-          <h4>Anjali Verma</h4>
+            <a href="https://linkedin.com/in/sonusolat" target="_blank">
+              <i class="fa-brands fa-linkedin"></i>
+            </a>
+          </div>
         </div>
-
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">Top agency work.</p>
-          <h4>Karan Shah</h4>
-        </div>
-
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">Perfect mobile UI.</p>
-          <h4>Pooja Nair</h4>
-        </div>
-
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">Great support.</p>
-          <h4>Arjun Gupta</h4>
-        </div>
-
-        <div class="t-card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">Loved everything!</p>
-          <h4>Sneha Kulkarni</h4>
-        </div>
-
       </div>
 
-      <button class="nav next">&#10095;</button>
+      <p class="footer-bottom">© 2026 CodesphereAgency. All rights reserved.</p>
+    </footer>
 
+    <script>
+      // COUNTER
+
+      let c1 = 0,
+        c2 = 0,
+        c3 = 0;
+
+      function animateCounter(id, target, speed, circle) {
+        let count = 0;
+
+        let interval = setInterval(() => {
+          if (count >= target) {
+            clearInterval(interval);
+          } else {
+            count++;
+            document.getElementById(id).innerText = count;
+
+            // update circle progress
+            let percent = (count / target) * 100;
+            circle.style.background = `conic-gradient(#2563eb ${percent}%, #1f2937 ${percent}%)`;
+          }
+        }, speed);
+      }
+
+      /* start animation when page loads */
+      window.onload = () => {
+        const circles = document.querySelectorAll(".circle");
+
+        animateCounter("c1", 65, 150, circles[0]);
+        animateCounter("c2", 35, 300, circles[1]);
+        animateCounter("c3", 20, 450, circles[2]);
+      };
+      let isSubmitting = false;
+
+      document
+        .getElementById("form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          if (isSubmitting) return;
+          isSubmitting = true;
+
+          const btn = document.getElementById("submitBtn");
+          const msgBox = document.getElementById("msg");
+          btn.disabled = true;
+          btn.innerHTML = `<span class="loader"></span> Sending...`;
+
+          const data = {
+            fname: this.fname.value.trim(),
+            lname: this.lname.value.trim(),
+            email: this.email.value.trim(),
+            phone: this.phone.value.trim(),
+            message: this.message.value.trim(),
+          };
+
+          // VALIDATION
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          const phoneRegex = /^[6-9]\d{9}$/;
+
+          if (!data.fname || data.fname.length < 2) {
+            return showMsg("❌ Enter valid name", "error");
+          }
+
+          if (!emailRegex.test(data.email)) {
+            return showMsg("❌ Invalid email address", "error");
+          }
+
+          if (data.phone && !phoneRegex.test(data.phone)) {
+            return showMsg("❌ Invalid phone number", "error");
+          }
+
+          if (!data.message || data.message.length < 5) {
+            return showMsg("❌ Message too short", "error");
+          }
+
+          try {
+            const res = await fetch("/contact", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+
+            const result = await res.text();
+
+            if (result === "success") {
+              showMsg("✅ Message Sent Successfully", "success");
+              document.getElementById("form").reset();
+            } else if (result === "duplicate") {
+              showMsg("⚠️ Already submitted with this email/phone", "warning");
+            } else {
+              showMsg("❌ Error saving data", "error");
+            }
+          } catch (err) {
+            showMsg("❌ Server error", "error");
+          }
+
+          reset();
+          function reset() {
+            btn.disabled = false;
+            btn.innerHTML = "Send Message";
+            isSubmitting = false;
+          }
+          function showMsg(text, type) {
+            msgBox.innerText = text;
+            msgBox.style.display = "block";
+
+            if (type === "success") msgBox.style.color = "#22c55e";
+            if (type === "error") msgBox.style.color = "#ef4444";
+            if (type === "warning") msgBox.style.color = "#facc15";
+
+            msgBox.style.opacity = "1";
+            msgBox.style.transform = "translateY(0)";
+
+            setTimeout(() => {
+              msgBox.style.opacity = "0";
+              msgBox.style.transform = "translateY(-10px)";
+            }, 3000);
+
+            setTimeout(() => {
+              msgBox.style.display = "none";
+            }, 3500);
+          }
+        });
+      // CHAT
+      function toggleChat() {
+        let box = document.getElementById("chat-body");
+        box.style.display = box.style.display === "block" ? "none" : "block";
+      }
+
+      async function sendMsg(e) {
+        if (e.key === "Enter") {
+          let input = document.getElementById("chatInput");
+          let msg = input.value;
+
+          document.getElementById("messages").innerHTML +=
+            "<div>You: " + msg + "</div>";
+          await new Promise((resolve) => setTimeout(resolve, 300));
+          const res = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: msg }),
+          });
+
+          const data = await res.json();
+
+          document.getElementById("messages").innerHTML +=
+            "<div>AI: " + data.reply + "</div>";
+
+          input.value = "";
+        }
+      }
+
+      const track = document.querySelector(".carousel-track");
+      const cards = document.querySelectorAll(".t-card");
+
+      let index = 0;
+
+      function update() {
+        const width = cards[0].offsetWidth;
+        track.style.transform = `translateX(-${index * width}px)`;
+
+        cards.forEach((c) => c.classList.remove("active"));
+        if (cards[index]) cards[index].classList.add("active");
+      }
+
+      /* auto slide */
+      setInterval(() => {
+        index = (index + 1) % cards.length;
+        update();
+      }, 3000);
+
+      /* arrows */
+      document.querySelector(".next").onclick = () => {
+        index = (index + 1) % cards.length;
+        update();
+      };
+
+      document.querySelector(".prev").onclick = () => {
+        index = (index - 1 + cards.length) % cards.length;
+        update();
+      };
+
+      /* swipe */
+      let startX = 0;
+
+      track.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+      });
+
+      track.addEventListener("touchend", (e) => {
+        let endX = e.changedTouches[0].clientX;
+
+        if (startX - endX > 50) index++;
+        else if (endX - startX > 50) index--;
+
+        index = (index + cards.length) % cards.length;
+        update();
+      });
+
+      /* FAQ TOGGLE */
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          let ans = item.querySelector(".faq-answer");
+          ans.style.display = ans.style.display === "block" ? "none" : "block";
+        });
+      });
+
+      /* SCROLL ANIMATION */
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      });
+
+      document.querySelectorAll(".fade").forEach((el) => {
+        observer.observe(el);
+      });
+
+      function openNav() {
+        document.getElementById("mobileMenu").style.right = "0";
+      }
+
+      function closeNav() {
+        document.getElementById("mobileMenu").style.right = "-220px";
+      }
+      function scrollToContact() {
+        document.getElementById("contact").scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      function openPopup() {
+        document.getElementById("contactPopup").style.display = "flex";
+      }
+
+      function closePopup() {
+        document.getElementById("contactPopup").style.display = "none";
+      }
+
+      /* click outside close */
+      window.onclick = function (e) {
+        const popup = document.getElementById("contactPopup");
+        if (e.target === popup) {
+          popup.style.display = "none";
+        }
+      };
+    </script>
+
+    <!-- CONTACT POPUP -->
+    <div id="contactPopup" class="popup">
+      <div class="popup-content">
+        <span class="close-popup" onclick="closePopup()">✕</span>
+
+        <iframe src="contact.html"></iframe>
+      </div>
     </div>
-
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="section" id="contact">
-<h2>Contact Us</h2>
-
-<form id="form">
-
-<div class="row">
-  <input name="fname" placeholder="First Name" required>
-  <input name="lname" placeholder="Last Name" required>
-</div>
-
-<div class="row">
-  <input name="email" placeholder="Email" required>
-  <input name="phone" placeholder="Phone">
-</div>
-
-<textarea name="message" placeholder="Message" required></textarea>
-
-<button type="submit" class="btn" id="submitBtn">Send Message</button>
-<div class="success" id="msg">Message Sent Successfully</div>
-
-</form>
-</section>
-
-<!-- WHATSAPP -->
-<a class="whatsapp" href="https://wa.me/917028079359">WhatsApp</a>
-
-<!-- CHATBOT -->
-<div id="chatbox">
-  <div id="chat-header" onclick="toggleChat()">AI Chat</div>
-  <div id="chat-body">
-    <div id="messages"></div>
-    <input id="chatInput" onkeypress="sendMsg(event)" placeholder="Ask...">
-  </div>
-</div>
-
-<!-- FAQ -->
-<section class="section fade">
-  <h2 class="section-title">Frequently Asked Questions</h2>
-
-  <div class="faq-box">
-
-    <div class="faq-item">
-      <div class="faq-question">How long does a website take?</div>
-      <div class="faq-answer">Usually 5–10 days depending on project complexity.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">Do you provide hosting?</div>
-      <div class="faq-answer">Yes, we help with domain, hosting & deployment.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">Is it mobile responsive?</div>
-      <div class="faq-answer">100% responsive across mobile, tablet & desktop.</div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- CTA -->
-<section class="cta fade">
-  <div class="cta-box">
-    <h2>Let’s Build Something Amazing 🚀</h2>
-    <p>Start your project today and grow your business online.</p>
- <button class="btn" onclick="scrollToContact()">Start Project</button>
-  </div>
-</section>
-
-
-<!-- FOOTER -->
-<footer class="footer">
-
-  <div class="footer-grid">
-
-    <div>
-      <h3>CodesphereAgency</h3>
-      <p>We create modern, high-converting websites for businesses worldwide.</p>
-    </div>
-
-    <div>
-      <h4>Quick Links</h4>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#contact">Contact</a>
-    </div>
-
-<div class="footer-contact">
-  <h4>Contact</h4>
-  <p class="phone">+91 7028079359</p>
-
-  <div class="footer-social">
-    <a href="https://instagram.com/codesphereagency" target="_blank">
-      <i class="fa-brands fa-instagram"></i>
-    </a>
-
-    <a href="https://wa.me/917028079359" target="_blank">
-      <i class="fa-brands fa-whatsapp"></i>
-    </a>
-
-    <a href="https://linkedin.com/in/sonusolat" target="_blank">
-      <i class="fa-brands fa-linkedin"></i>
-    </a>
-  </div>
-</div>
-  </div>
-
-  <p class="footer-bottom">© 2026 CodesphereAgency. All rights reserved.</p>
-
-</footer>
-
-
-
-
-<script>
-// COUNTER
-
-let c1=0,c2=0,c3=0;
-
-function animateCounter(id, target, speed, circle){
-  let count = 0;
-
-  let interval = setInterval(()=>{
-    if(count >= target){
-      clearInterval(interval);
-    }else{
-      count++;
-      document.getElementById(id).innerText = count;
-
-      // update circle progress
-      let percent = (count / target) * 100;
-      circle.style.background =
-        `conic-gradient(#2563eb ${percent}%, #1f2937 ${percent}%)`;
-    }
-  }, speed);
-}
-
-/* start animation when page loads */
-window.onload = ()=>{
-  const circles = document.querySelectorAll(".circle");
-
-  animateCounter("c1", 65, 150, circles[0]);
-  animateCounter("c2", 35, 300, circles[1]);
-  animateCounter("c3", 20, 450, circles[2]);
-};
-let isSubmitting = false;
-
-document.getElementById("form").addEventListener("submit", async function(e){
-  e.preventDefault();
-
-  if(isSubmitting) return;
-  isSubmitting = true;
-
-  const btn = document.getElementById("submitBtn");
-  const msgBox = document.getElementById("msg");
-btn.disabled = true;
-btn.innerHTML = `<span class="loader"></span> Sending...`;
-
-  const data = {
-    fname: this.fname.value.trim(),
-    lname: this.lname.value.trim(),
-    email: this.email.value.trim(),
-    phone: this.phone.value.trim(),
-    message: this.message.value.trim()
-  };
-
-  // VALIDATION
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const phoneRegex = /^[6-9]\d{9}$/;
-
-  if(!data.fname || data.fname.length < 2){
-    return showMsg("❌ Enter valid name", "error");
-  }
-
-  if(!emailRegex.test(data.email)){
-    return showMsg("❌ Invalid email address", "error");
-  }
-
-  if(data.phone && !phoneRegex.test(data.phone)){
-    return showMsg("❌ Invalid phone number", "error");
-  }
-
-  if(!data.message || data.message.length < 5){
-    return showMsg("❌ Message too short", "error");
-  }
-
-  try{
-    const res = await fetch("/contact", {
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(data)
-    });
-
-    const result = await res.text();
-
-    if(result === "success"){
-      showMsg("✅ Message Sent Successfully", "success");
-      document.getElementById("form").reset();
-    }
-    else if(result === "duplicate"){
-      showMsg("⚠️ Already submitted with this email/phone", "warning");
-    }
-    else{
-      showMsg("❌ Error saving data", "error");
-    }
-
-  }catch(err){
-    showMsg("❌ Server error", "error");
-  }
-
-  reset();
-function reset(){
-  btn.disabled = false;
-  btn.innerHTML = "Send Message";
-  isSubmitting = false;
-}
-  function showMsg(text, type){
-    msgBox.innerText = text;
-    msgBox.style.display = "block";
-
-    if(type === "success") msgBox.style.color = "#22c55e";
-    if(type === "error") msgBox.style.color = "#ef4444";
-    if(type === "warning") msgBox.style.color = "#facc15";
-
-    msgBox.style.opacity = "1";
-    msgBox.style.transform = "translateY(0)";
-
-    setTimeout(()=>{
-      msgBox.style.opacity = "0";
-      msgBox.style.transform = "translateY(-10px)";
-    },3000);
-
-    setTimeout(()=>{
-      msgBox.style.display = "none";
-    },3500);
-  }
-});
-// CHAT
-function toggleChat(){
-  let box=document.getElementById("chat-body");
-  box.style.display=box.style.display==="block"?"none":"block";
-}
-
-async function sendMsg(e){
-  if(e.key==="Enter"){
-    let input=document.getElementById("chatInput");
-    let msg=input.value;
-
-    document.getElementById("messages").innerHTML += "<div>You: "+msg+"</div>";
-  await new Promise(resolve => setTimeout(resolve, 300));
-    const res=await fetch("/chat",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({message:msg})
-    });
-
-    const data=await res.json();
-
-    document.getElementById("messages").innerHTML += "<div>AI: "+data.reply+"</div>";
-
-    input.value="";
-  }
-}
-
-const track = document.querySelector('.carousel-track');
-const cards = document.querySelectorAll('.t-card');
-
-let index = 0;
-
-function update(){
-  const width = cards[0].offsetWidth;
-  track.style.transform = `translateX(-${index * width}px)`;
-
-  cards.forEach(c => c.classList.remove('active'));
-  if(cards[index]) cards[index].classList.add('active');
-}
-
-/* auto slide */
-setInterval(()=>{
-  index = (index + 1) % cards.length;
-  update();
-}, 3000);
-
-/* arrows */
-document.querySelector('.next').onclick = ()=>{
-  index = (index + 1) % cards.length;
-  update();
-};
-
-document.querySelector('.prev').onclick = ()=>{
-  index = (index - 1 + cards.length) % cards.length;
-  update();
-};
-
-/* swipe */
-let startX = 0;
-
-track.addEventListener("touchstart", e=>{
-  startX = e.touches[0].clientX;
-});
-
-track.addEventListener("touchend", e=>{
-  let endX = e.changedTouches[0].clientX;
-
-  if(startX - endX > 50) index++;
-  else if(endX - startX > 50) index--;
-
-  index = (index + cards.length) % cards.length;
-  update();
-});
-
-
-/* FAQ TOGGLE */
-document.querySelectorAll(".faq-item").forEach(item=>{
-  item.addEventListener("click", ()=>{
-    let ans = item.querySelector(".faq-answer");
-    ans.style.display = ans.style.display === "block" ? "none" : "block";
-  });
-});
-
-/* SCROLL ANIMATION */
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("show");
-    }
-  });
-});
-
-document.querySelectorAll(".fade").forEach(el=>{
-  observer.observe(el);
-});
-
-function openNav(){
-  document.getElementById("mobileMenu").style.right = "0";
-}
-
-function closeNav(){
-  document.getElementById("mobileMenu").style.right = "-220px";
-}
-function scrollToContact(){
-  document.getElementById("contact").scrollIntoView({
-    behavior: "smooth"
-  });
-}
-
-function openPopup(){
-  document.getElementById("contactPopup").style.display = "flex";
-}
-
-function closePopup(){
-  document.getElementById("contactPopup").style.display = "none";
-}
-
-/* click outside close */
-window.onclick = function(e){
-  const popup = document.getElementById("contactPopup");
-  if(e.target === popup){
-    popup.style.display = "none";
-  }
-}
-</script>
-
-
-<!-- CONTACT POPUP -->
-<div id="contactPopup" class="popup">
-  <div class="popup-content">
-
-    <span class="close-popup" onclick="closePopup()">✕</span>
-
-    <iframe src="contact.html"></iframe>
-
-  </div>
-</div>
-</body>
+  </body>
 </html>
