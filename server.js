@@ -188,7 +188,7 @@ app.post("/chat", (req, res) => {
     reply = "Our pricing starts from $199 💰";
   }
   else if(msg.includes("services")){
-    reply = "We offer Web Development, UI/UX, Ecommerce & SEO 🚀";
+    reply = "We offer Web Development, UI/UX, Ecommerce Website & SEO 🚀";
   }
   else if(msg.includes("contact")){
     reply = "You can contact us via form or WhatsApp 📞 7028079359";
