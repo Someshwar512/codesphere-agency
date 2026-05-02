@@ -193,6 +193,10 @@ app.post("/chat", (req, res) => {
     reply = "We offer a range of services including:\n• Web Development 💻\n• UI/UX Design 🎨\n• E-commerce Solutions 🛒\n• SEO Optimization 📈\nHow can we help your business grow?";
   }
 
+  else if (msg === "ok" || msg === "okay") {
+    reply = "Great 👍 Please let us know if you'd like to proceed or need more details. We're here to help!";
+  }
+
   else if (msg.includes("contact")) {
     reply = "You can reach us via our contact form or WhatsApp 📞 +91 7028079359. We typically respond within a few hours.";
   }
