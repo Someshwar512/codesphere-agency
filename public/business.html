@@ -1,153 +1,181 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Business Plan - Codesphere</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
+<title>Business Plan - Codesphere</title>
 
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Poppins;
-      }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-      body {
-        background: #070b1a;
-        color: #fff;
-        padding: 20px;
-      }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
 
-      /* CONTAINER */
-      .box {
-        max-width: 800px;
-        margin: auto;
-        background: #111827;
-        padding: 40px 30px;
-        border-radius: 16px;
-        text-align: center;
-        border: 1px solid #1f2937;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-      }
+body{
+  background:linear-gradient(135deg,#050816,#0f172a);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:20px;
+}
 
-      /* TITLE */
-      h1 {
-        font-size: 32px;
-        margin-bottom: 10px;
-      }
+/* MAIN BOX */
+.box{
+  width:100%;
+  max-width:850px;
+  background:rgba(17,24,39,0.7);
+  backdrop-filter:blur(15px);
+  padding:40px 30px;
+  border-radius:20px;
+  text-align:center;
+  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+}
 
-      .subtitle {
-        color: #9ca3af;
-        margin-bottom: 25px;
-      }
+/* BADGE */
+.badge{
+  display:inline-block;
+  background:linear-gradient(90deg,#f59e0b,#fbbf24);
+  color:#000;
+  padding:6px 15px;
+  border-radius:20px;
+  font-size:12px;
+  margin-bottom:10px;
+  font-weight:600;
+}
 
-      /* FEATURES */
-      .features {
-        text-align: left;
-        margin-top: 20px;
-      }
+/* TITLE */
+h1{
+  font-size:34px;
+}
 
-      .features p {
-        margin: 10px 0;
-        padding-left: 10px;
-      }
+/* PRICE */
+.price{
+  font-size:42px;
+  color:#60a5fa;
+  font-weight:700;
+  margin:10px 0;
+}
 
-      /* BUTTON */
-      .btn {
-        display: inline-block;
-        margin-top: 25px;
-        padding: 12px 25px;
-        background: #2563eb;
-        color: #fff;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: 0.3s;
-      }
+/* SUBTITLE */
+.subtitle{
+  color:#9ca3af;
+  margin-bottom:25px;
+}
 
-      .btn:hover {
-        background: #1d4ed8;
-        transform: scale(1.05);
-      }
+/* FEATURES */
+.features{
+  text-align:left;
+  margin-top:20px;
+}
 
-      /* BACK BUTTON */
-      .back {
-        display: inline-block;
-        margin-top: 15px;
-        color: #9ca3af;
-        text-decoration: none;
-        font-size: 14px;
-      }
+.features p{
+  margin:8px 0;
+  padding:8px;
+  border-radius:8px;
+  transition:0.3s;
+}
 
-      .back:hover {
-        color: #60a5fa;
-      }
+.features p:hover{
+  background:rgba(96,165,250,0.1);
+}
 
-      /* ================= MOBILE ================= */
+/* BUTTON */
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:14px 30px;
+  background:linear-gradient(90deg,#2563eb,#60a5fa);
+  color:#fff;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+  position:relative;
+  overflow:hidden;
+}
 
-      @media (max-width: 768px) {
-        .box {
-          padding: 25px 20px;
-        }
+.btn::after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:100%;
+  background:rgba(255,255,255,0.2);
+  top:0;
+  left:0;
+  transition:0.4s;
+}
 
-        h1 {
-          font-size: 24px;
-        }
+.btn:hover::after{width:100%;}
+.btn:hover{transform:scale(1.05);}
 
-        .subtitle {
-          font-size: 14px;
-        }
+/* TRUST */
+.trust{
+  margin-top:20px;
+  font-size:14px;
+  color:#9ca3af;
+}
 
-        .features p {
-          font-size: 14px;
-        }
-      }
+/* BACK */
+.back{
+  display:inline-block;
+  margin-top:20px;
+  color:#9ca3af;
+  text-decoration:none;
+}
 
-      @media (max-width: 480px) {
-        body {
-          padding: 15px;
-        }
+.back:hover{color:#60a5fa;}
 
-        .btn {
-          width: 100%;
-          text-align: center;
-        }
+/* MOBILE */
+@media(max-width:768px){
+  h1{font-size:26px;}
+  .price{font-size:32px;}
+}
+</style>
+</head>
 
-        h1 {
-          font-size: 20px;
-        }
-      }
-    </style>
-  </head>
+<body>
 
-  <body>
-    <div class="box">
-      <h1>Business Plan - $299</h1>
-      <p class="subtitle">Best for growing business</p>
+<div class="box" data-aos="zoom-in">
 
-      <h3>Includes:</h3>
+  <div class="badge">⭐ Best Value</div>
 
-      <div class="features">
-        <p>✔ 5-8 Pages Website</p>
-        <p>✔ Premium UI/UX Design</p>
-        <p>✔ SEO Optimization</p>
-        <p>✔ Speed Optimization</p>
-        <p>✔ Admin Panel</p>
-        <p>✔ 7 Days Delivery</p>
-        <p>✔ Unlimited Revisions</p>
-        <p>✔ Custom Domain Support</p>
-        <p>✔ 1 Year Maintenance</p>
-      </div>
+  <h1>Business Plan</h1>
+  <div class="price">$299</div>
 
-      <a href="contact.html" class="btn">Start Project</a>
-      <br />
-      <br />
-      <a href="index.html" class="back">⬅ Back to Home</a>
-    </div>
-  </body>
+  <p class="subtitle">Perfect for growing businesses & startups</p>
+
+  <div class="features">
+    <p data-aos="fade-right">✔ 5-8 Pages Website</p>
+    <p data-aos="fade-right">✔ Premium UI/UX Design</p>
+    <p data-aos="fade-right">✔ SEO Optimization</p>
+    <p data-aos="fade-right">✔ Speed Optimization</p>
+    <p data-aos="fade-right">✔ Admin Panel</p>
+    <p data-aos="fade-right">✔ 7 Days Delivery</p>
+    <p data-aos="fade-right">✔ Unlimited Revisions</p>
+    <p data-aos="fade-right">✔ Custom Domain Support</p>
+    <p data-aos="fade-right">✔ 1 Year Maintenance</p>
+  </div>
+
+  <a href="contact.html" class="btn">🚀 Start Project</a>
+
+  <div class="trust">
+    ✔ High performance • ✔ Premium design • ✔ Business growth focused
+  </div>
+
+  <a href="index.html" class="back">⬅ Back to Home</a>
+
+</div>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({
+  duration:1000,
+  once:true
+});
+</script>
+
+</body>
 </html>

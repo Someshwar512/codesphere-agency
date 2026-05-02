@@ -1,163 +1,203 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Premium Plan - Codesphere</title>
+<title>Premium Plan - Codesphere</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Poppins;
-      }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
 
-      body {
-        background: #070b1a;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 20px;
-      }
+body{
+  background:linear-gradient(135deg,#050816,#0f172a);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:20px;
+}
 
-      /* MAIN BOX */
-      .box {
-        width: 100%;
-        max-width: 850px;
-        background: linear-gradient(145deg, #111827, #0b1020);
-        padding: 45px 35px;
-        border-radius: 18px;
-        text-align: center;
-        border: 1px solid #1f2937;
-        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-      }
+/* MAIN BOX */
+.box{
+  width:100%;
+  max-width:900px;
+  background:linear-gradient(145deg,#111827,#0b1020);
+  padding:45px 35px;
+  border-radius:20px;
+  text-align:center;
+  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 25px 70px rgba(0,0,0,0.6);
+  position:relative;
+  overflow:hidden;
+}
 
-      /* TITLE */
-      h1 {
-        font-size: 34px;
-        margin-bottom: 10px;
-      }
+/* PREMIUM GLOW */
+.box::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:radial-gradient(circle,#9333ea33,transparent);
+  animation:rotate 10s linear infinite;
 
-      /* TAGLINE */
-      .subtitle {
-        color: #cbd5f5;
-        margin-bottom: 20px;
-      }
 
-      /* PRICE BADGE */
-      .price {
-        font-size: 38px;
-        color: #60a5fa;
-        margin-bottom: 20px;
-      }
+  pointer-events:none; /* ✅ THIS LINE ADD */
+}
 
-      /* FEATURE LIST */
-      .features {
-        margin: 20px 0;
-        text-align: left;
-      }
+@keyframes rotate{
+  0%{transform:rotate(0deg);}
+  100%{transform:rotate(360deg);}
+}
 
-      .features p {
-        padding: 8px 0;
-        border-bottom: 1px solid #1f2937;
-      }
+/* BADGE */
+.badge{
+  display:inline-block;
+  background:linear-gradient(90deg,#9333ea,#c084fc);
+  padding:6px 15px;
+  border-radius:20px;
+  font-size:12px;
+  margin-bottom:10px;
+  font-weight:600;
+}
 
-      /* BUTTON */
-      .btn {
-        display: inline-block;
-        margin-top: 25px;
-        background: #2563eb;
-        color: #fff;
-        padding: 14px 30px;
-        border-radius: 10px;
-        text-decoration: none;
-        transition: 0.3s;
-      }
+/* TITLE */
+h1{
+  font-size:36px;
+}
 
-      .btn:hover {
-        transform: scale(1.05);
-        background: #1d4ed8;
-      }
+/* PRICE */
+.price{
+  font-size:46px;
+  color:#60a5fa;
+  font-weight:700;
+  margin:10px 0;
+}
 
-      /* BADGE */
-      .badge {
-        display: inline-block;
-        background: #9333ea;
-        padding: 5px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        margin-bottom: 10px;
-      }
+/* SUBTITLE */
+.subtitle{
+  color:#cbd5f5;
+  margin-bottom:25px;
+}
 
-      /* ================= MOBILE ================= */
+/* FEATURES */
+.features{
+  margin:20px 0;
+  text-align:left;
+}
 
-      @media (max-width: 768px) {
-        .box {
-          padding: 30px 20px;
-        }
+.features p{
+  padding:10px;
+  border-radius:8px;
+  transition:0.3s;
+}
 
-        h1 {
-          font-size: 26px;
-        }
+.features p:hover{
+  background:rgba(147,51,234,0.1);
+  transform:translateX(5px);
+}
 
-        .price {
-          font-size: 30px;
-        }
+/* BUTTON */
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:14px 32px;
+  background:linear-gradient(90deg,#9333ea,#c084fc);
+  color:#fff;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+  position:relative;
+  overflow:hidden;
+}
 
-        .features p {
-          font-size: 14px;
-        }
-      }
+.btn::after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:100%;
+  background:rgba(255,255,255,0.2);
+  top:0;
+  left:0;
+  transition:0.4s;
+}
 
-      /* EXTRA SMALL */
+.btn:hover::after{width:100%;}
+.btn:hover{transform:scale(1.05);}
 
-      @media (max-width: 480px) {
-        h1 {
-          font-size: 22px;
-        }
+/* TRUST */
+.trust{
+  margin-top:20px;
+  font-size:14px;
+  color:#9ca3af;
+}
 
-        .btn {
-          width: 100%;
-          text-align: center;
-        }
-      }
-    </style>
-  </head>
+/* BACK */
+.back{
+  display:inline-block;
+  margin-top:20px;
+  color:#9ca3af;
+  text-decoration:none;
+}
 
-  <body>
-    <div class="box">
-      <span class="badge">🔥 Most Powerful Plan</span>
+.back:hover{color:#60a5fa;}
 
-      <h1>Premium Plan</h1>
-      <div class="price">$499</div>
+/* MOBILE */
+@media(max-width:768px){
+  h1{font-size:26px;}
+  .price{font-size:34px;}
+}
+</style>
+</head>
 
-      <p class="subtitle">Best for startups & ecommerce businesses</p>
+<body>
 
-      <div class="features">
-        <p>✔ Full Website / Web App</p>
-        <p>✔ Ecommerce System</p>
-        <p>✔ Payment Integration</p>
-        <p>✔ Custom Features</p>
-        <p>✔ Advanced SEO</p>
-        <p>✔ 15 Days Delivery</p>
-        <p>✔ Unlimited Revisions</p>
-        <p>✔ Custom Domain Support</p>
-        <p>✔ 1 Year Maintenance</p>
-      </div>
+<div class="box" data-aos="zoom-in">
 
-      <a href="contact.html" class="btn">Start Project</a>
-      <br />
-      <br />
-      <a href="index.html" class="back">⬅ Back to Home</a>
-    </div>
-  </body>
+  <div class="badge">🔥 Most Powerful Plan</div>
+
+  <h1>Premium Plan</h1>
+  <div class="price">$499</div>
+
+  <p class="subtitle">Perfect for startups, ecommerce & scalable web apps</p>
+
+  <div class="features">
+    <p data-aos="fade-right">✔ Full Website / Web Application</p>
+    <p data-aos="fade-right">✔ Ecommerce System</p>
+    <p data-aos="fade-right">✔ Payment Gateway Integration</p>
+    <p data-aos="fade-right">✔ Custom Features Development</p>
+    <p data-aos="fade-right">✔ Advanced SEO Optimization</p>
+    <p data-aos="fade-right">✔ High Performance Optimization</p>
+    <p data-aos="fade-right">✔ 15 Days Delivery</p>
+    <p data-aos="fade-right">✔ Unlimited Revisions</p>
+    <p data-aos="fade-right">✔ Custom Domain Support</p>
+    <p data-aos="fade-right">✔ 1 Year Maintenance</p>
+  </div>
+
+  <a href="contact.html" class="btn">🚀 Start Project</a>
+
+  <div class="trust">
+    ✔ Enterprise-level solution • ✔ Scalable architecture • ✔ Premium support
+  </div>
+
+    <a href="index.html" class="back">⬅ Back to Home</a>
+
+
+</div>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({
+  duration:1000,
+  once:true
+});
+</script>
+
+</body>
 </html>
