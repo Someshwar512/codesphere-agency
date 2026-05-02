@@ -146,7 +146,7 @@ app.post("/contact", (req, res) => {
       
       <h2 style="color:#2563eb;">Thank You, ${fname} 👋</h2>
 
-      <p>We have received your message and our team will contact you shortly.</p>
+      <p>We have received your message and our team will contact you  soon shortly.</p>
 
       <div style="margin-top:20px;">
         <b>Your Message:</b>
@@ -175,26 +175,50 @@ app.post("/contact", (req, res) => {
   });
 });
 
-//ChatBot API
+// ChatBot API (Professional Version)
 app.post("/chat", (req, res) => {
   const msg = req.body.message.toLowerCase();
 
-  let reply = "Sorry, I didn’t understand. Please contact us.";
+  let reply = "I'm sorry, I didn't fully understand that. Could you please rephrase or contact our team directly? 😊";
 
-  if(msg.includes("hi") || msg.includes("hello")){
-    reply = "Hello 👋 Welcome to Codesphere Agency!";
+  if (msg.includes("hi") || msg.includes("hello")) {
+    reply = "Hello 👋 Welcome to Codesphere Agency! How can we assist you today?";
   }
-  else if(msg.includes("price")){
-    reply = "Our pricing starts from $199 💰";
+
+  else if (msg.includes("price") || msg.includes("cost")) {
+    reply = "Our website packages start from $199 💰. Pricing depends on your requirements. Would you like a custom quote?";
   }
-  else if(msg.includes("services")){
-    reply = "We offer Web Development, UI/UX, Ecommerce Website & SEO 🚀";
+
+  else if (msg.includes("services")) {
+    reply = "We offer a range of services including:\n• Web Development 💻\n• UI/UX Design 🎨\n• E-commerce Solutions 🛒\n• SEO Optimization 📈\nHow can we help your business grow?";
   }
-  else if(msg.includes("contact")){
-    reply = "You can contact us via form or WhatsApp 📞 7028079359";
+
+  else if (msg.includes("contact")) {
+    reply = "You can reach us via our contact form or WhatsApp 📞 +91 7028079359. We typically respond within a few hours.";
   }
-  else if(msg.includes("website")){
-    reply = "Yes, we build modern websites for businesses 💻";
+
+  else if (msg.includes("website")) {
+    reply = "Yes, we specialize in building modern, responsive, and high-performance websites tailored to your business needs 🚀";
+  }
+
+  else if (msg.includes("time") || msg.includes("delivery")) {
+    reply = "Our standard delivery time is 3–7 days depending on the project scope. We always aim for fast and quality delivery ⏱️";
+  }
+
+  else if (msg.includes("seo")) {
+    reply = "Yes, we provide SEO services to help your website rank higher on Google and attract more customers 📈";
+  }
+
+  else if (msg.includes("portfolio") || msg.includes("work")) {
+    reply = "We’d be happy to show you our recent projects! Please visit our portfolio section on the website or ask us for direct links 🔗";
+  }
+
+  else if (msg.includes("custom") || msg.includes("project")) {
+    reply = "Great! We love working on custom projects 😊 Please share your requirements, and we’ll provide a tailored solution for you.";
+  }
+
+  else if (msg.includes("thanks") || msg.includes("thank you")) {
+    reply = "You're welcome! 😊 If you have any more questions, feel free to ask anytime.";
   }
 
   res.json({ reply });
