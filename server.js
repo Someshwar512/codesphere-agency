@@ -222,7 +222,7 @@ app.post("/chat", (req, res) => {
   }
 
   else if (msg.includes("thanks") || msg.includes("thank you")) {
-    reply = "You're welcome! 😊 If you have any more questions, feel free to ask anytime.";
+    reply = "You're welcome! 😊 If you have any more questions or infomations needs you have contact us fill, feel free to ask anytime.";
   }
 
   res.json({ reply });
@@ -232,5 +232,5 @@ app.post("/chat", (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, "0.0.0.0", () => {
-    console.log("Server running on ports " + PORT);
+    console.log("Server running on ports  " + PORT);
 });
