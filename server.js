@@ -49,38 +49,31 @@ app.get("/", (req, res) => {
 
 // ================= CONTACT API =================
 app.post("/contact", async (req, res) => {
+  const { fname, lname, email, phone, message } = req.body;
+
+  if (!fname || !email || !message) {
+    return res.send("error");
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[6-9]\d{9}$/;
+
+  if (!emailRegex.test(email)) return res.send("error");
+  if (phone && !phoneRegex.test(phone)) return res.send("error");
+
+  res.send("success");
+
   try {
-    const { fname, lname, email, phone, message } = req.body;
-
-    // ================= VALIDATION =================
-    if (!fname || !email || !message) {
-      return res.status(400).json({ success: false, message: "Missing fields" });
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^[6-9]\d{9}$/;
-
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({ success: false, message: "Invalid email" });
-    }
-
-    if (phone && !phoneRegex.test(phone)) {
-      return res.status(400).json({ success: false, message: "Invalid phone" });
-    }
-
-    // ================= DUPLICATE CHECK =================
+    // Check duplicate
     const existing = await Lead.findOne({
       $or: [{ email }, { phone }]
     });
 
     if (existing) {
-      return res.status(409).json({
-        success: false,
-        message: "duplicate"
-      });
+      return console.log("Duplicate entry");
     }
 
-    // ================= SAVE TO MONGODB =================
+    // Save data
     const newLead = new Lead({
       fname,
       lname,
@@ -90,50 +83,34 @@ app.post("/contact", async (req, res) => {
     });
 
     await newLead.save();
-    console.log("✅ Lead saved to MongoDB:", email);
 
-    // ================= EMAIL TO ADMIN =================
-    await transporter.sendMail({
+    // Send email to admin
+    transporter.sendMail({
       from: `"Codesphere Agency" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
       subject: "🚀 New Lead Received",
       html: `
         <h2>New Lead</h2>
-        <p><b>Name:</b> ${fname} ${lname}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone}</p>
-        <p><b>Message:</b> ${message}</p>
+        <p>Name: ${fname} ${lname}</p>
+        <p>Email: ${email}</p>
+        <p>Phone: ${phone}</p>
+        <p>Message: ${message}</p>
       `
-    });
+    }).catch(console.error);
 
-    console.log("📩 Admin email sent");
-
-    // ================= EMAIL TO USER =================
-    await transporter.sendMail({
+    // Send email to user
+    transporter.sendMail({
       from: `"Codesphere Agency" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "✅ We received your message",
       html: `
-        <h2>Hi ${fname} 👋</h2>
-        <p>Thank you for contacting Codesphere Agency.</p>
-        <p>We will get back to you soon 🚀</p>
+        <h2>Thank You ${fname}</h2>
+        <p>We will contact you soon.</p>
       `
-    });
-
-    console.log("📩 User email sent");
-
-    // ================= FINAL RESPONSE =================
-    return res.json({
-      success: true,
-      message: "Lead saved & emails sent"
-    });
+    }).catch(console.error);
 
   } catch (err) {
-    console.log("❌ CONTACT ERROR:", err);
-    return res.status(500).json({
-      success: false,
-      message: "Server error"
-    });
+    console.log(err);
   }
 });
 

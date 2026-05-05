@@ -1353,17 +1353,17 @@
           }
 
           try {
-            const res = await fetch("https://codesphere-agency.onrender.com/contact", {
+            const res = await fetch("/contact", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(data),
             });
 
-           const result = await res.json();
-if (result.success) {
-  showMsg("✅ Message Sent Successfully", "success");
-  document.getElementById("form").reset();
+            const result = await res.text();
 
+            if (result === "success") {
+              showMsg("✅ Message Sent Successfully", "success");
+              document.getElementById("form").reset();
             } else if (result === "duplicate") {
               showMsg("⚠️ Already submitted with this email/phone", "warning");
             } else {
