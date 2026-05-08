@@ -51,29 +51,35 @@ app.get("/", (req, res) => {
 app.post("/contact", async (req, res) => {
   const { fname, lname, email, phone, message } = req.body;
 
+  // REQUIRED FIELDS
   if (!fname || !email || !message) {
     return res.send("error");
   }
 
+  // VALIDATION
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^[6-9]\d{9}$/;
 
-  if (!emailRegex.test(email)) return res.send("error");
-  if (phone && !phoneRegex.test(phone)) return res.send("error");
+  if (!emailRegex.test(email)) {
+    return res.send("error");
+  }
 
-  res.send("success");
+  if (phone && !phoneRegex.test(phone)) {
+    return res.send("error");
+  }
 
   try {
-    // Check duplicate
+
+    // CHECK DUPLICATE
     const existing = await Lead.findOne({
       $or: [{ email }, { phone }]
     });
 
     if (existing) {
-      return console.log("Duplicate entry");
+      return res.send("duplicate");
     }
 
-    // Save data
+    // SAVE DATA
     const newLead = new Lead({
       fname,
       lname,
@@ -84,33 +90,55 @@ app.post("/contact", async (req, res) => {
 
     await newLead.save();
 
-    // Send email to admin
-    transporter.sendMail({
-      from: `"Codesphere Agency" <${process.env.EMAIL_USER}>`,
+    console.log("✅ Data Saved");
+
+    // SEND ADMIN EMAIL
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
       subject: "🚀 New Lead Received",
       html: `
-        <h2>New Lead</h2>
-        <p>Name: ${fname} ${lname}</p>
-        <p>Email: ${email}</p>
-        <p>Phone: ${phone}</p>
-        <p>Message: ${message}</p>
-      `
-    }).catch(console.error);
+        <h2>New Lead Received</h2>
 
-    // Send email to user
-    transporter.sendMail({
-      from: `"Codesphere Agency" <${process.env.EMAIL_USER}>`,
+        <p><b>First Name:</b> ${fname}</p>
+        <p><b>Last Name:</b> ${lname}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Phone:</b> ${phone}</p>
+        <p><b>Message:</b> ${message}</p>
+      `
+    });
+
+    console.log("✅ Admin Email Sent");
+
+    // SEND USER EMAIL
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
       to: email,
-      subject: "✅ We received your message",
+      subject: "✅ We Received Your Message",
       html: `
         <h2>Thank You ${fname}</h2>
-        <p>We will contact you soon.</p>
+
+        <p>Your message has been received successfully.</p>
+
+        <p>Our team will contact you soon.</p>
+
+        <br>
+
+        <p>Regards,</p>
+        <p>Codesphere Agency</p>
       `
-    }).catch(console.error);
+    });
+
+    console.log("✅ User Email Sent");
+
+    // FINAL SUCCESS
+    res.send("success");
 
   } catch (err) {
-    console.log(err);
+
+    console.log("❌ CONTACT ERROR:", err);
+
+    res.send("error");
   }
 });
 
