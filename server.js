@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const path = require("path");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
-
 require("dotenv").config();
 
 const app = express();
@@ -27,55 +26,42 @@ mongoose.connect(process.env.MONGO_URI)
 
 // ================= SCHEMA =================
 const leadSchema = new mongoose.Schema({
-
   fname: String,
   lname: String,
   email: String,
   phone: String,
   message: String,
-
   created_at: {
     type: Date,
     default: Date.now
   }
-
 });
 
 const Lead = mongoose.model("Lead", leadSchema);
 
 // ================= EMAIL SETUP =================
 const transporter = nodemailer.createTransport({
-
-  service: "gmail",
-
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   }
-
 });
 
-// ================= VERIFY EMAIL =================
+// EMAIL VERIFY
 transporter.verify((error, success) => {
-
   if (error) {
-
-    console.log("❌ EMAIL ERROR:");
-    console.log(error);
-
+    console.log("❌ EMAIL ERROR:", error);
   } else {
-
     console.log("✅ EMAIL SERVER READY");
-
   }
-
 });
 
 // ================= HOME ROUTE =================
 app.get("/", (req, res) => {
-
   res.sendFile(path.join(__dirname, "public", "index.html"));
-
 });
 
 // ================= CONTACT API =================
@@ -83,22 +69,15 @@ app.post("/contact", async (req, res) => {
 
   try {
 
-    const {
-      fname,
-      lname,
-      email,
-      phone,
-      message
-    } = req.body;
+    const { fname, lname, email, phone, message } = req.body;
 
-    // ================= VALIDATION =================
-
+    // REQUIRED FIELDS
     if (!fname || !email || !message) {
       return res.send("error");
     }
 
+    // VALIDATION
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
     const phoneRegex = /^[6-9]\d{9}$/;
 
     if (!emailRegex.test(email)) {
@@ -109,79 +88,58 @@ app.post("/contact", async (req, res) => {
       return res.send("error");
     }
 
-    // ================= CHECK DUPLICATE =================
-
+    // CHECK DUPLICATE
     const existing = await Lead.findOne({
-      $or: [
-        { email },
-        { phone }
-      ]
+      $or: [{ email }, { phone }]
     });
 
     if (existing) {
-
-      console.log("⚠️ Duplicate Entry");
-
       return res.send("duplicate");
     }
 
-    // ================= SAVE DATABASE =================
-
+    // SAVE DATABASE
     const newLead = new Lead({
-
       fname,
       lname,
       email,
       phone,
       message
-
     });
 
     await newLead.save();
 
     console.log("✅ Data Saved");
 
-    // ================= ADMIN EMAIL =================
-
-    await transporter.sendMail({
-
-      from: `"Codesphere Agency" <${process.env.EMAIL_USER}>`,
-
+    // SEND EMAIL TO ADMIN
+    transporter.sendMail({
+      from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
-
       subject: "🚀 New Lead Received",
-
       html: `
-
         <h2>New Lead Received</h2>
 
         <p><b>First Name:</b> ${fname}</p>
-
         <p><b>Last Name:</b> ${lname}</p>
-
         <p><b>Email:</b> ${email}</p>
-
         <p><b>Phone:</b> ${phone}</p>
-
         <p><b>Message:</b> ${message}</p>
-
       `
+    }, (err, info) => {
+
+      if (err) {
+        console.log("❌ Admin Email Error:", err);
+      } else {
+        console.log("✅ Admin Email Sent");
+      }
+
     });
 
-    console.log("✅ Admin Email Sent");
-
-    // ================= USER EMAIL =================
-
-    await transporter.sendMail({
-
-      from: `"Codesphere Agency" <${process.env.EMAIL_USER}>`,
-
+    // SEND EMAIL TO USER
+    transporter.sendMail({
+      from: process.env.EMAIL_USER,
       to: email,
-
       subject: "✅ We Received Your Message",
-
       html: `
-
         <h2>Thank You ${fname}</h2>
 
         <p>Your message has been received successfully.</p>
@@ -191,27 +149,27 @@ app.post("/contact", async (req, res) => {
         <br>
 
         <p>Regards,</p>
-
         <p>Codesphere Agency</p>
-
       `
+    }, (err, info) => {
+
+      if (err) {
+        console.log("❌ User Email Error:", err);
+      } else {
+        console.log("✅ User Email Sent");
+      }
+
     });
 
-    console.log("✅ User Email Sent");
-
-    // ================= SUCCESS =================
-
+    // FINAL SUCCESS RESPONSE
     res.send("success");
 
   } catch (err) {
 
-    console.log("❌ CONTACT ERROR:");
-    console.log(err);
+    console.log("❌ CONTACT ERROR:", err);
 
     res.send("error");
-
   }
-
 });
 
 // ================= CHATBOT =================
@@ -222,21 +180,13 @@ app.post("/chat", (req, res) => {
   let reply = "Sorry, I didn't understand.";
 
   if (msg.includes("hi") || msg.includes("hello")) {
-
     reply = "Hello 👋 Welcome to Codesphere!";
-
   }
-
   else if (msg.includes("price")) {
-
     reply = "Our plans start from $199 💰";
-
   }
-
   else if (msg.includes("services")) {
-
     reply = "We provide Web Development, UI/UX Design & SEO 🚀";
-
   }
 
   res.json({ reply });
@@ -247,7 +197,5 @@ app.post("/chat", (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, "0.0.0.0", () => {
-
   console.log("🚀 Server running on port " + PORT);
-
 });
