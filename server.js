@@ -108,7 +108,7 @@ app.post("/contact", async (req, res) => {
 
     await newLead.save();
 
-    console.log("✅ Data Saved");
+    console.log("✅ Data Saved sucessfully");
 
     // SEND EMAIL TO ADMIN
     transporter.sendMail({
