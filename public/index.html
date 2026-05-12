@@ -907,6 +907,153 @@
           grid-template-columns: 1fr;
         }
       }
+      /* ===== PORTFOLIO SECTION ===== */
+
+.portfolio-section {
+  width: 100%;
+  padding: 100px 20px;
+  background: #0f172a;
+  overflow: hidden;
+}
+
+.portfolio-title {
+  text-align: center;
+  font-size: 48px;
+  margin-bottom: 50px;
+  color: #fff;
+}
+
+/* SLIDER */
+.portfolio-slider {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* TRACK */
+.portfolio-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* ITEM */
+.portfolio-item {
+  min-width: 100%;
+  flex-shrink: 0;
+  padding: 10px;
+}
+
+/* CARD */
+.portfolio-card {
+  position: relative;
+  width: 100%;
+  border-radius: 25px;
+  overflow: hidden;
+  background: #111827;
+}
+
+/* IMAGE */
+.portfolio-card img {
+  width: 100%;
+  height: 550px;
+  object-fit: cover;
+  display: block;
+}
+
+/* OVERLAY */
+.portfolio-overlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 30px;
+  background: linear-gradient(
+    transparent,
+    rgba(0,0,0,0.85)
+  );
+}
+
+.portfolio-overlay h3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.portfolio-overlay p {
+  color: #d1d5db;
+  margin-bottom: 15px;
+}
+
+/* BUTTON */
+.portfolio-btn {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 50px;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+}
+
+/* ARROWS */
+.portfolio-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 55px;
+  height: 55px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.portfolio-prev {
+  left: 15px;
+}
+
+.portfolio-next {
+  right: 15px;
+}
+
+.portfolio-nav:hover {
+  background: #2563eb;
+}
+
+/* FIX NEXT SECTION OVERLAP */
+#pricing {
+  margin-top: 40px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .portfolio-title{
+    font-size: 34px;
+  }
+
+  .portfolio-card img{
+    height: 320px;
+  }
+
+  .portfolio-overlay{
+    padding: 20px;
+  }
+
+  .portfolio-overlay h3{
+    font-size: 22px;
+  }
+
+  .portfolio-nav{
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+
+}
     </style>
   </head>
 
@@ -1070,6 +1217,84 @@
         </div>
       </div>
     </section>
+<!-- PORTFOLIO -->
+<section class="portfolio-section">
+
+  <h2 class="portfolio-title">
+    Our Portfolio
+  </h2>
+
+  <div class="portfolio-slider">
+
+    <!-- LEFT -->
+    <button class="portfolio-nav portfolio-prev">
+      &#10094;
+    </button>
+
+    <!-- TRACK -->
+    <div class="portfolio-track">
+
+      <!-- ITEM 1 -->
+      <div class="portfolio-item">
+        <div class="portfolio-card">
+
+          <img src="	https://www.ikf.co.in/blog/wp-content/uploads/force-1.jpg" alt="">
+  <div class="portfolio-overlay">
+            <h3>Car Rental Website</h3>
+
+            <p>
+              Premium responsive business website design.
+            </p>
+            </div>
+        </div>
+      </div>
+
+      <!-- ITEM 2 -->
+      <div class="portfolio-item">
+        <div class="portfolio-card">
+
+          <img src="https://www.ikf.co.in/blog/wp-content/uploads/Mindgate-copy.jpg" alt="">
+
+          <div class="portfolio-overlay">
+            <h3>Ecommerce Website</h3>
+
+            <p>
+              Modern online shopping UI experience.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ITEM 3 -->
+      <div class="portfolio-item">
+        <div class="portfolio-card">
+
+          <img src="https://www.ikf.co.in/blog/wp-content/uploads/Desai-Brothers-Limited_v2.jpg" alt="">
+
+          <div class="portfolio-overlay">
+            <h3>Agency Landing Page</h3>
+
+            <p>
+              High converting modern marketing website.
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <button class="portfolio-nav portfolio-next">
+      &#10095;
+    </button>
+
+  </div>
+
+</section>
+
     <!-- CLIENT SUCCESS STORIES -->
     <section class="testimonials" id="testimonials">
       <div class="section">
@@ -1525,6 +1750,70 @@
           popup.style.display = "none";
         }
       };
+
+      /* ===== PORTFOLIO ===== */
+
+const portfolioTrack =
+  document.querySelector(".portfolio-track");
+
+const portfolioItems =
+  document.querySelectorAll(".portfolio-item");
+
+const nextBtn =
+  document.querySelector(".portfolio-next");
+
+const prevBtn =
+  document.querySelector(".portfolio-prev");
+
+let portfolioIndex = 0;
+
+/* UPDATE */
+function updatePortfolio() {
+
+  portfolioTrack.style.transform =
+    `translateX(-${portfolioIndex * 100}%)`;
+
+}
+
+/* NEXT */
+nextBtn.addEventListener("click", () => {
+
+  portfolioIndex++;
+
+  if(portfolioIndex >= portfolioItems.length){
+    portfolioIndex = 0;
+  }
+
+  updatePortfolio();
+
+});
+
+/* PREV */
+prevBtn.addEventListener("click", () => {
+
+  portfolioIndex--;
+
+  if(portfolioIndex < 0){
+    portfolioIndex =
+      portfolioItems.length - 1;
+  }
+
+  updatePortfolio();
+
+});
+
+/* AUTO SLIDE */
+setInterval(() => {
+
+  portfolioIndex++;
+
+  if(portfolioIndex >= portfolioItems.length){
+    portfolioIndex = 0;
+  }
+
+  updatePortfolio();
+
+}, 4000);
     </script>
 
     <!-- CONTACT POPUP -->
