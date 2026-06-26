@@ -221,7 +221,8 @@ document.getElementById("form").addEventListener("submit", async function(e){
     return reset("Message too short", "error");
   }
 
-  try{
+  try
+  {
     const res = await fetch("/contact", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
@@ -234,17 +235,20 @@ document.getElementById("form").addEventListener("submit", async function(e){
       reset("✅ Message sent successfully!", "success");
       document.getElementById("form").reset();
     }
-    else if(result === "duplicate"){
+    else if(result === "duplicate")
+    {
       reset("⚠️ You already submitted this contact.", "duplicate");
     }
     else{
       reset("❌ Something went wrong", "error");
     }
 
+
   }catch(err){
     reset("❌ Server error", "error");
   }
-
+  
+  
   function reset(message, type){
     msgBox.innerText = message;
     msgBox.className = "msg " + type;
@@ -259,6 +263,10 @@ document.getElementById("form").addEventListener("submit", async function(e){
     }, 4000);
   }
 });
+
+
+
+
 </script>
 
 </body>

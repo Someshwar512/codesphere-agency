@@ -65,10 +65,9 @@ app.get("/", (req, res) => {
 });
 
 // ================= CONTACT API =================
+// ================= CONTACT API =================
 app.post("/contact", async (req, res) => {
-
   try {
-
     const { fname, lname, email, phone, message } = req.body;
 
     // REQUIRED FIELDS
@@ -108,69 +107,59 @@ app.post("/contact", async (req, res) => {
 
     await newLead.save();
 
-    console.log("✅ Data Saved sucessfully");
+    console.log("✅ Data Saved Successfully");
 
     // SEND EMAIL TO ADMIN
-    transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: "🚀 New Lead Received",
-      html: `
-        <h2>New Lead Received</h2>
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER,
+        subject: "🚀 New Lead Received",
+        html: `
+          <h2>New Lead Received</h2>
+          <p><b>First Name:</b> ${fname}</p>
+          <p><b>Last Name:</b> ${lname || "-"}</p>
+          <p><b>Email:</b> ${email}</p>
+          <p><b>Phone:</b> ${phone || "-"}</p>
+          <p><b>Message:</b> ${message}</p>
+        `
+      });
 
-        <p><b>First Name:</b> ${fname}</p>
-        <p><b>Last Name:</b> ${lname}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone}</p>
-        <p><b>Message:</b> ${message}</p>
-      `
-    }, (err, info) => {
-
-      if (err) {
-        console.log("❌ Admin Email Error:", err);
-      } else {
-        console.log("✅ Admin Email Sent");
-      }
-
-    });
+      console.log("✅ Admin Email Sent");
+    } catch (err) {
+      console.error("❌ Admin Email Error:", err);
+    }
 
     // SEND EMAIL TO USER
-    transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: "✅ We Received Your Message",
-      html: `
-        <h2>Thank You ${fname}</h2>
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: "✅ We Received Your Message",
+        html: `
+          <h2>Thank You ${fname}</h2>
 
-        <p>Your message has been received successfully.</p>
+          <p>Your message has been received successfully.</p>
 
-        <p>Our team will contact you soon.</p>
+          <p>Our team will contact you soon.</p>
 
-        <br>
+          <br>
 
-        <p>Regards,</p>
-        <p>Codesphere Agency</p>
-      `
-    }, (err, info) => {
+          <p>Regards,</p>
+          <p><strong>Codesphere Agency</strong></p>
+        `
+      });
 
-      if (err) {
-        console.log("❌ User Email Error:", err);
-      } else {
-        console.log("✅ User Email Sent");
-      }
+      console.log("✅ User Email Sent");
+    } catch (err) {
+      console.error("❌ User Email Error:", err);
+    }
 
-    });
-
-
-    // resizeBy.arguments();
-    // FINAL SUCCESS RESPONSE
-    res.send("success");
+    return res.send("success");
 
   } catch (err) {
-
-    console.log("❌ CONTACT ERROR:", err);
-
-    res.send("error");
+    console.error("❌ CONTACT ERROR:", err);
+    return res.send("error");
   }
 });
 
