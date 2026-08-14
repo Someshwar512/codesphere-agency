@@ -106,6 +106,8 @@ app.post("/contact", async (req, res) => {
       message
     });
 
+    
+
     await newLead.save();
 
     console.log("✅ Data Saved sucessfully");
