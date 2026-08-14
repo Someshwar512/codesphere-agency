@@ -137,31 +137,43 @@ app.post("/contact", async (req, res) => {
     });
 
     // SEND EMAIL TO USER
-    transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: "✅ We Received Your Message",
-      html: `
-        <h2>Thank You ${fname}</h2>
+  // SEND EMAIL TO USER
+transporter.sendMail({
+  from: `"Codesphere Agency" <${process.env.EMAIL_USER}>`,
+  to: email,
+  replyTo: process.env.EMAIL_USER,
+  subject: "We received your message - Codesphere Agency",
+  html: `
+    <!DOCTYPE html>
+    <html>
+      <body style="font-family: Arial, sans-serif; line-height: 1.6;">
 
-        <p>Your message has been received successfully.</p>
+        <h2>Thank You ${fname}!</h2>
 
-        <p>Our team will contact you soon.</p>
+        <p>We have received your message successfully.</p>
+
+        <p>
+          Our team at <strong>Codesphere Agency</strong>
+          will review your request and contact you soon.
+        </p>
 
         <br>
 
         <p>Regards,</p>
-        <p>Codesphere Agency</p>
-      `
-    }, (err, info) => {
+        <p><strong>Codesphere Agency</strong></p>
 
-      if (err) {
-        console.log("❌ User Email Error:", err);
-      } else {
-        console.log("✅ User Email Sent");
-      }
+      </body>
+    </html>
+  `
+}, (err, info) => {
 
-    });
+  if (err) {
+    console.log("❌ User Email Error:", err);
+  } else {
+    console.log("✅ User Email Sent:", info.messageId);
+  }
+
+});
 
 
     // resizeBy.arguments();
